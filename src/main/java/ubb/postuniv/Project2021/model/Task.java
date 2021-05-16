@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Task extends Entity<Long> {
+public class Task extends BaseEntity<Long> {
 
     private String title;
     private String description;

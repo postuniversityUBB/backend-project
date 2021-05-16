@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AppUser extends Entity<Long> {
+public class AppUser extends BaseEntity<Long> {
 
     private String firstName;
     private String lastName;
