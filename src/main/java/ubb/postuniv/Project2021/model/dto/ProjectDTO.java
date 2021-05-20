@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class ProjectDTO extends BaseDTO {
     private String description;
     private LocalDate dateAdded;
     private LocalDate deadline;
-    private ProjectStatus projectStatus;
+    private String projectStatus;
 
     @ApiModelProperty(notes = "The unique code of the user that added the project")
     private String addedByUserCode;

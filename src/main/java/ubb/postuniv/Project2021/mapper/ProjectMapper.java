@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ubb.postuniv.Project2021.model.dto.ProjectDTO;
 import ubb.postuniv.Project2021.model.dto.TaskDTO;
+import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 
@@ -20,7 +21,7 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTO> {
 
         List<Task> taskList = taskMapper.convertDtosToModels(projectDTO.getTasks());
 
-        return new Project(projectDTO.getProjectCode(), projectDTO.getTitle(), projectDTO.getDescription(), projectDTO.getDateAdded(), projectDTO.getDeadline(), projectDTO.getProjectStatus(), projectDTO.getAddedByUserCode(), taskList);
+        return new Project(projectDTO.getProjectCode(), projectDTO.getTitle(), projectDTO.getDescription(), projectDTO.getDateAdded(), projectDTO.getDeadline(), ProjectStatus.valueOf(projectDTO.getProjectStatus().toUpperCase()), projectDTO.getAddedByUserCode(), taskList);
     }
 
     @Override
@@ -28,6 +29,6 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTO> {
 
         List<TaskDTO> taskDTOList = taskMapper.convertModelsToDtos(project.getTasks());
 
-        return new ProjectDTO(project.getProjectCode(), project.getTitle(), project.getDescription(), project.getDateAdded(), project.getDeadline(), project.getProjectStatus(), project.getAddedByUserCode(), taskDTOList);
+        return new ProjectDTO(project.getProjectCode(), project.getTitle(), project.getDescription(), project.getDateAdded(), project.getDeadline(), project.getProjectStatus().getProjectStatus(), project.getAddedByUserCode(), taskDTOList);
     }
 }

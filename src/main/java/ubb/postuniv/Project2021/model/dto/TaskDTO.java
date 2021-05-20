@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ubb.postuniv.Project2021.model.enums.TaskStatus;
 
 import java.time.LocalDate;
 
@@ -21,7 +20,7 @@ public class TaskDTO extends BaseDTO {
     private String description;
     private LocalDate dateAdded;
     private LocalDate deadline;
-    private TaskStatus taskStatus;
+    private String taskStatus;
 
     @ApiModelProperty(notes = "The unique code of the user that added the task")
     private String createdByUserCode;
