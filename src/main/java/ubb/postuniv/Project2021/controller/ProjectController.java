@@ -1,6 +1,7 @@
 package ubb.postuniv.Project2021.controller;
 
 
+import io.swagger.annotations.ApiParam;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import ubb.postuniv.Project2021.service.ProjectService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 @Log4j2
 @CrossOrigin(origins = "*")
 public class ProjectController {
@@ -48,7 +50,7 @@ public class ProjectController {
     }
 
     @PostMapping("projects/{projectCode}/tasks")
-    public void addTaskToProject(@PathVariable String projectCode, @RequestBody TaskDTO taskDto) {
+    public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTO taskDto) {
 
         log.info("projectCode = {}, TaskDto = {}", projectCode, taskDto);
 

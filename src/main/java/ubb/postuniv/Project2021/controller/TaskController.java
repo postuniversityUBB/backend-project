@@ -14,6 +14,7 @@ import ubb.postuniv.Project2021.service.TaskService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 @Log4j2
 @CrossOrigin(origins = "*")
 public class TaskController {

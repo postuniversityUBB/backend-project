@@ -1,5 +1,7 @@
 package ubb.postuniv.Project2021.model.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@ApiModel(description = "Details about the task")
 public class TaskDTO extends BaseDTO {
 
     private String title;
@@ -19,7 +22,11 @@ public class TaskDTO extends BaseDTO {
     private LocalDate dateAdded;
     private LocalDate deadline;
     private TaskStatus taskStatus;
+
+    @ApiModelProperty(notes = "The unique code of the user that added the task")
     private String createdByUserCode;
+
+    @ApiModelProperty(notes = "The unique code of the user that the task was assigned to")
     private String assignedToUserCode;
 
     @Override
