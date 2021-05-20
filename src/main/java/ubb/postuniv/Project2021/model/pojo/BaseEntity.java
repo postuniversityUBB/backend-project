@@ -1,4 +1,4 @@
-package ubb.postuniv.Project2021.model;
+package ubb.postuniv.Project2021.model.pojo;
 
 
 import lombok.AllArgsConstructor;
