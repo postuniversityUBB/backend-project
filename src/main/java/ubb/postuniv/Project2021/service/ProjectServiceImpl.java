@@ -34,6 +34,8 @@ public class ProjectServiceImpl implements ProjectService {
         AppUser appUser = appUserRepository.findByUserCode(project.getAddedByUserCode()).orElseThrow(() ->
                 new ItemNotFoundException("User with code " + project.getAddedByUserCode() + " was not found"));
 
+        project.setAppUser(appUser);
+
         projectRepository.save(project);
 
         appUser.getProjects().add(project);
@@ -48,6 +50,16 @@ public class ProjectServiceImpl implements ProjectService {
                 new ItemNotFoundException("Project with code " + projectCode + " was not found"));
 
         project.getTasks().add(task);
+        task.setProject(project);
+
+        AppUser createdByUser = appUserRepository.findByUserCode(task.getCreatedByUserCode()).orElseThrow(() ->
+                new ItemNotFoundException("User with code " + task.getCreatedByUserCode() + " was not found"));
+
+        AppUser assignedToUser = appUserRepository.findByUserCode(task.getAssignedToUserCode()).orElseThrow(() ->
+                new ItemNotFoundException("User with code " + task.getCreatedByUserCode() + " was not found"));
+
+        task.setCreatedBy(createdByUser);
+        task.setAssignedTo(assignedToUser);
 
         projectRepository.save(project);
     }

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ApiModel(description = "Details about the task")
-public class TaskDTO extends BaseDTO {
+public class TaskDTORequest extends BaseDTO {
 
     private String title;
     private String description;

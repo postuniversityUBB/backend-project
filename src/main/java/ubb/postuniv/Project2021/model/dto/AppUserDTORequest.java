@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel(description = "Details about the user")
-public class AppUserDTO extends BaseDTO {
+public class AppUserDTORequest extends BaseDTO {
 
     @ApiModelProperty(notes = "The unique code of the user")
     private String userCode;
@@ -27,8 +27,8 @@ public class AppUserDTO extends BaseDTO {
     private String email;
     private String password;
     private boolean isAdmin;
-    private List<ProjectDTO> projects = new ArrayList<>();
-    private List<TaskDTO> tasks = new ArrayList<>();
+    private List<ProjectDTORequest> projects = new ArrayList<>();
+    private List<TaskDTORequest> tasks = new ArrayList<>();
 
 
     @Override

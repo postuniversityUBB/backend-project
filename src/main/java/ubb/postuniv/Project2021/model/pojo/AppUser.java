@@ -17,7 +17,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-@Table(name = "users")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Project.class)
 public class AppUser extends BaseEntity<Long> {
 
@@ -25,22 +24,24 @@ public class AppUser extends BaseEntity<Long> {
     private String userCode;
     private String firstName;
     private String lastName;
-
-    @Column(unique = true)
     private String email;
-
     private String password;
     private boolean isAdmin;
 
-    @OneToMany
+    @OneToMany(mappedBy = "appUser")
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "assignedTo")
     private List<Task> tasks = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date createdAt;
+
+    public AppUser(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public AppUser(String userCode, String firstName, String lastName, String email, boolean isAdmin, List<Project> projects, List<Task> tasks, Date createdAt) {
         this.userCode = userCode;

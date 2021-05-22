@@ -2,8 +2,8 @@ package ubb.postuniv.Project2021.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ubb.postuniv.Project2021.model.dto.ProjectDTO;
-import ubb.postuniv.Project2021.model.dto.TaskDTO;
+import ubb.postuniv.Project2021.model.dto.ProjectDTORequest;
+import ubb.postuniv.Project2021.model.dto.TaskDTORequest;
 import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
@@ -11,24 +11,24 @@ import ubb.postuniv.Project2021.model.pojo.Task;
 import java.util.List;
 
 @Component
-public class ProjectMapper extends AbstractMapper<Project, ProjectDTO> {
+public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
 
     @Autowired
-    Mapper<Task, TaskDTO> taskMapper;
+    Mapper<Task, TaskDTORequest> taskMapper;
 
     @Override
-    public Project convertDtoToModel(ProjectDTO projectDTO) {
+    public Project convertDtoToModel(ProjectDTORequest projectDTORequest) {
 
-        List<Task> taskList = taskMapper.convertDtosToModels(projectDTO.getTasks());
+        List<Task> taskList = taskMapper.convertDtosToModels(projectDTORequest.getTasks());
 
-        return new Project(projectDTO.getProjectCode(), projectDTO.getTitle(), projectDTO.getDescription(), projectDTO.getDateAdded(), projectDTO.getDeadline(), ProjectStatus.valueOf(projectDTO.getProjectStatus().toUpperCase()), projectDTO.getAddedByUserCode(), taskList);
+        return new Project(projectDTORequest.getProjectCode(), projectDTORequest.getTitle(), projectDTORequest.getDescription(), projectDTORequest.getDateAdded(), projectDTORequest.getDeadline(), ProjectStatus.valueOf(projectDTORequest.getProjectStatus().toUpperCase()), projectDTORequest.getAddedByUserCode(), taskList);
     }
 
     @Override
-    public ProjectDTO convertModelToDto(Project project) {
+    public ProjectDTORequest convertModelToDto(Project project) {
 
-        List<TaskDTO> taskDTOList = taskMapper.convertModelsToDtos(project.getTasks());
+        List<TaskDTORequest> taskDTORequestList = taskMapper.convertModelsToDtos(project.getTasks());
 
-        return new ProjectDTO(project.getProjectCode(), project.getTitle(), project.getDescription(), project.getDateAdded(), project.getDeadline(), project.getProjectStatus().getProjectStatus(), project.getAddedByUserCode(), taskDTOList);
+        return new ProjectDTORequest(project.getProjectCode(), project.getTitle(), project.getDescription(), project.getDateAdded(), project.getDeadline(), project.getProjectStatus().getProjectStatus(), project.getAddedByUserCode(), taskDTORequestList);
     }
 }

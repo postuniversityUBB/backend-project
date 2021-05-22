@@ -3,8 +3,8 @@ package ubb.postuniv.Project2021.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ubb.postuniv.Project2021.model.dto.AppUserDTOResponse;
-import ubb.postuniv.Project2021.model.dto.ProjectDTO;
-import ubb.postuniv.Project2021.model.dto.TaskDTO;
+import ubb.postuniv.Project2021.model.dto.ProjectDTOResponse;
+import ubb.postuniv.Project2021.model.dto.TaskDTOResponse;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
@@ -17,10 +17,10 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
 
 
     @Autowired
-    Mapper<Project, ProjectDTO> projectMapper;
+    Mapper<Project, ProjectDTOResponse> projectMapper;
 
     @Autowired
-    Mapper<Task, TaskDTO> taskMapper;
+    Mapper<Task, TaskDTOResponse> taskMapper;
 
     @Override
     public AppUser convertDtoToModel(AppUserDTOResponse appUserDTOResponse) {
@@ -34,9 +34,9 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
     @Override
     public AppUserDTOResponse convertModelToDto(AppUser appUser) {
 
-        List<ProjectDTO> projectDTOList = projectMapper.convertModelsToDtos(appUser.getProjects());
-        List<TaskDTO> taskDTOList = taskMapper.convertModelsToDtos(appUser.getTasks());
+        List<ProjectDTOResponse> projectDTORequestList = projectMapper.convertModelsToDtos(appUser.getProjects());
+        List<TaskDTOResponse> taskDTORequestList = taskMapper.convertModelsToDtos(appUser.getTasks());
 
-        return new AppUserDTOResponse(appUser.getUserCode(), appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.isAdmin(), projectDTOList, taskDTOList, appUser.getCreatedAt());
+        return new AppUserDTOResponse(appUser.getUserCode(), appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.isAdmin(), projectDTORequestList, taskDTORequestList, appUser.getCreatedAt());
     }
 }

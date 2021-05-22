@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ubb.postuniv.Project2021.mapper.Mapper;
-import ubb.postuniv.Project2021.model.dto.TaskDTO;
+import ubb.postuniv.Project2021.model.dto.TaskDTORequest;
+import ubb.postuniv.Project2021.model.dto.TaskDTOResponse;
 import ubb.postuniv.Project2021.model.pojo.Task;
 import ubb.postuniv.Project2021.service.TaskService;
 
@@ -23,22 +24,25 @@ public class TaskController {
     private TaskService taskService;
 
     @Autowired
-    Mapper<Task, TaskDTO> taskMapper;
+    Mapper<Task, TaskDTORequest> taskMapper;
+
+    @Autowired
+    Mapper<Task, TaskDTOResponse> taskResponseMapper;
 
     @GetMapping("/tasks")
-    public ResponseEntity<List<TaskDTO>> showAllTasks() {
+    public ResponseEntity<List<TaskDTOResponse>> showAllTasks() {
 
         log.info("taskList = {}", taskService.getAll());
 
-        return new ResponseEntity<>(taskMapper.convertModelsToDtos(taskService.getAll()), HttpStatus.OK);
+        return new ResponseEntity<>(taskResponseMapper.convertModelsToDtos(taskService.getAll()), HttpStatus.OK);
     }
 
     @PostMapping("/tasks")
-    public void addOneTask(@RequestBody TaskDTO taskDto) {
+    public void addOneTask(@RequestBody TaskDTORequest taskDtoRequest) {
 
-        log.info("taskDto ={}", taskDto);
+        log.info("taskDto ={}", taskDtoRequest);
 
-        taskService.addTask(taskMapper.convertDtoToModel(taskDto));
+        taskService.addTask(taskMapper.convertDtoToModel(taskDtoRequest));
     }
 
 }

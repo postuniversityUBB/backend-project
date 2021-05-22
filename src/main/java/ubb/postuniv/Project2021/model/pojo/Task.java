@@ -9,14 +9,13 @@ import ubb.postuniv.Project2021.model.enums.TaskStatus;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "tasks")
 public class Task extends BaseEntity<Long> {
 
     private String title;
@@ -30,4 +29,30 @@ public class Task extends BaseEntity<Long> {
     private String createdByUserCode;
     private String assignedToUserCode;
 
+    @ManyToOne
+    private Project project;
+
+    @ManyToOne
+    AppUser createdBy;
+
+    @ManyToOne
+    AppUser assignedTo;
+
+    public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus, String createdByUserCode, String assignedToUserCode) {
+        this.title = title;
+        this.description = description;
+        this.dateAdded = dateAdded;
+        this.deadline = deadline;
+        this.taskStatus = taskStatus;
+        this.createdByUserCode = createdByUserCode;
+        this.assignedToUserCode = assignedToUserCode;
+    }
+
+    public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus) {
+        this.title = title;
+        this.description = description;
+        this.dateAdded = dateAdded;
+        this.deadline = deadline;
+        this.taskStatus = taskStatus;
+    }
 }

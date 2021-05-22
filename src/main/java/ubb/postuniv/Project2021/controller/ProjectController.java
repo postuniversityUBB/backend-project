@@ -8,8 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ubb.postuniv.Project2021.mapper.Mapper;
-import ubb.postuniv.Project2021.model.dto.ProjectDTO;
-import ubb.postuniv.Project2021.model.dto.TaskDTO;
+import ubb.postuniv.Project2021.model.dto.ProjectDTORequest;
+import ubb.postuniv.Project2021.model.dto.ProjectDTOResponse;
+import ubb.postuniv.Project2021.model.dto.TaskDTORequest;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 import ubb.postuniv.Project2021.service.ProjectService;
@@ -22,40 +23,42 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ProjectController {
 
-
     @Autowired
     private ProjectService projectService;
 
     @Autowired
-    Mapper<Project, ProjectDTO> projectMapper;
+    Mapper<Project, ProjectDTORequest> projectMapper;
 
     @Autowired
-    Mapper<Task, TaskDTO> taskMapper;
+    Mapper<Project, ProjectDTOResponse> projectResponseMapper;
+
+
+    @Autowired
+    Mapper<Task, TaskDTORequest> taskMapper;
 
 
     @GetMapping("/projects")
-    public ResponseEntity<List<ProjectDTO>> showAllProjects() {
+    public ResponseEntity<List<ProjectDTOResponse>> showAllProjects() {
 
         log.info("projectList = {}", projectService.getAll());
 
-        return new ResponseEntity<>(projectMapper.convertModelsToDtos(projectService.getAll()), HttpStatus.OK);
+        return new ResponseEntity<>(projectResponseMapper.convertModelsToDtos(projectService.getAll()), HttpStatus.OK);
     }
 
     @PostMapping("/projects")
-    public void addProject(@RequestBody ProjectDTO projectDto) {
+    public void addProject(@RequestBody ProjectDTORequest projectDtoRequest) {
 
-        log.info("projectDto = {}", projectDto);
+        log.info("projectDto = {}", projectDtoRequest);
 
-        projectService.addProject(projectMapper.convertDtoToModel(projectDto));
+        projectService.addProject(projectMapper.convertDtoToModel(projectDtoRequest));
     }
 
     @PostMapping("projects/{projectCode}/tasks")
-    public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTO taskDto) {
+    public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTORequest taskDtoRequest) {
 
-        log.info("projectCode = {}, TaskDto = {}", projectCode, taskDto);
+        log.info("projectCode = {}, TaskDto = {}", projectCode, taskDtoRequest);
 
-        projectService.addTaskToProject(projectCode, taskMapper.convertDtoToModel(taskDto));
+        projectService.addTaskToProject(projectCode, taskMapper.convertDtoToModel(taskDtoRequest));
     }
-
 
 }

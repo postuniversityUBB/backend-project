@@ -1,6 +1,5 @@
 package ubb.postuniv.Project2021.model.dto;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,19 +16,16 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel(description = "Details about the project")
-public class ProjectDTO extends BaseDTO {
+public class ProjectDTOResponse extends BaseDTO {
 
     @ApiModelProperty(notes = "The unique code of the project")
     private String projectCode;
-
     private String title;
     private String description;
     private LocalDate dateAdded;
     private LocalDate deadline;
     private String projectStatus;
+    private AppUserViewModel createdBy;
+    private List<TaskDTOResponse> tasks = new ArrayList<>();
 
-    @ApiModelProperty(notes = "The unique code of the user that added the project")
-    private String addedByUserCode;
-
-    private List<TaskDTO> tasks = new ArrayList<>();
 }

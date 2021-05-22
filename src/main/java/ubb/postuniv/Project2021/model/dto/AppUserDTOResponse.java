@@ -19,14 +19,12 @@ public class AppUserDTOResponse extends BaseDTO {
 
     @ApiModelProperty(notes = "The unique code of the user")
     private String userCode;
-
     private String firstName;
     private String lastName;
     private String email;
     private boolean isAdmin;
-    private List<ProjectDTO> projects = new ArrayList<>();
-    private List<TaskDTO> tasks = new ArrayList<>();
+    private List<ProjectDTOResponse> projects = new ArrayList<>();
+    private List<TaskDTOResponse> tasks = new ArrayList<>();
     private Date createdAt;
-
 
 }

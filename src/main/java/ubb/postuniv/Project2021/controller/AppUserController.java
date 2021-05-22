@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ubb.postuniv.Project2021.mapper.Mapper;
-import ubb.postuniv.Project2021.model.dto.AppUserDTO;
+import ubb.postuniv.Project2021.model.dto.AppUserDTORequest;
 import ubb.postuniv.Project2021.model.dto.AppUserDTOResponse;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
 import ubb.postuniv.Project2021.service.AppUserService;
@@ -24,7 +24,7 @@ public class AppUserController {
     private AppUserService appUserService;
 
     @Autowired
-    private Mapper<AppUser, AppUserDTO> appUserMapper;
+    private Mapper<AppUser, AppUserDTORequest> appUserMapper;
 
     @Autowired
     private Mapper<AppUser, AppUserDTOResponse> appUserResponseMapper;
@@ -40,10 +40,11 @@ public class AppUserController {
     }
 
     @PostMapping("/users")
-    public void addUser(@RequestBody AppUserDTO appUserDto) {
+    public void addUser(@RequestBody AppUserDTORequest appUserDtoRequest) {
 
-        log.info("appUserDto = {}", appUserDto);
+        log.info("appUserDto = {}", appUserDtoRequest);
 
-        appUserService.addUSer(appUserMapper.convertDtoToModel(appUserDto));
+        appUserService.addUSer(appUserMapper.convertDtoToModel(appUserDtoRequest));
     }
+
 }
