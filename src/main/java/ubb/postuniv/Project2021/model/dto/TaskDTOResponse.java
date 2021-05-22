@@ -21,6 +21,6 @@ public class TaskDTOResponse extends BaseDTO {
     private LocalDate dateAdded;
     private LocalDate deadline;
     private String taskStatus;
-    private AppUserViewModel createdBy;
-    private AppUserViewModel assignedTo;
+    private String createdBy;
+    private String assignedTo;
 }

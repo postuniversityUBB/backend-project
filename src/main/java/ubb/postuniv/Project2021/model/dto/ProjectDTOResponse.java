@@ -25,7 +25,7 @@ public class ProjectDTOResponse extends BaseDTO {
     private LocalDate dateAdded;
     private LocalDate deadline;
     private String projectStatus;
-    private AppUserViewModel createdBy;
+    private String createdBy;
     private List<TaskDTOResponse> tasks = new ArrayList<>();
 
 }

@@ -1,7 +1,6 @@
 package ubb.postuniv.Project2021.mapper;
 
 import org.springframework.stereotype.Component;
-import ubb.postuniv.Project2021.model.dto.AppUserViewModel;
 import ubb.postuniv.Project2021.model.dto.TaskDTOResponse;
 import ubb.postuniv.Project2021.model.enums.TaskStatus;
 import ubb.postuniv.Project2021.model.pojo.Task;
@@ -23,8 +22,8 @@ public class TaskResponseMapper extends AbstractMapper<Task, TaskDTOResponse> {
     @Override
     public TaskDTOResponse convertModelToDto(Task task) {
 
-        AppUserViewModel createdBy = new AppUserViewModel(task.getCreatedBy().getFirstName(), task.getCreatedBy().getLastName());
-        AppUserViewModel assignedTo = new AppUserViewModel(task.getAssignedTo().getFirstName(), task.getAssignedTo().getLastName());
+        String createdBy = task.getCreatedBy().getFirstName() + " " + task.getCreatedBy().getLastName();
+        String assignedTo = task.getAssignedTo().getFirstName() + " " +  task.getAssignedTo().getLastName();
 
         return new TaskDTOResponse(task.getTitle(),
                 task.getDescription(),

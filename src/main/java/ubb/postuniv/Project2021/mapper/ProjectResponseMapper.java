@@ -2,7 +2,6 @@ package ubb.postuniv.Project2021.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ubb.postuniv.Project2021.model.dto.AppUserViewModel;
 import ubb.postuniv.Project2021.model.dto.ProjectDTOResponse;
 import ubb.postuniv.Project2021.model.dto.TaskDTOResponse;
 import ubb.postuniv.Project2021.model.enums.ProjectStatus;
@@ -37,7 +36,7 @@ public class ProjectResponseMapper extends AbstractMapper<Project, ProjectDTORes
 
         List<TaskDTOResponse> taskDTORequestList = taskMapper.convertModelsToDtos(project.getTasks());
 
-        AppUserViewModel appUserViewModel = new AppUserViewModel(project.getAppUser().getFirstName(), project.getAppUser().getLastName());
+        String createdBy = project.getAppUser().getFirstName() + " " + project.getAppUser().getLastName();
 
         return new ProjectDTOResponse(project.getProjectCode(),
                 project.getTitle(),
@@ -45,7 +44,7 @@ public class ProjectResponseMapper extends AbstractMapper<Project, ProjectDTORes
                 project.getDateAdded(),
                 project.getDeadline(),
                 project.getProjectStatus().getProjectStatus(),
-                appUserViewModel,
+                createdBy,
                 taskDTORequestList);
     }
 }
