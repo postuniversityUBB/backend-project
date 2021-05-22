@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "projects")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Project.class)
 public class Project extends BaseEntity<Long> {
 
