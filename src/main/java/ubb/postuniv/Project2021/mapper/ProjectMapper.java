@@ -18,8 +18,7 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
     public Project convertDtoToModel(ProjectDTORequest projectDTORequest) {
 
 
-        return new Project(projectDTORequest.getProjectCode(),
-                projectDTORequest.getTitle(),
+        return new Project(projectDTORequest.getTitle(),
                 projectDTORequest.getDescription(),
                 projectDTORequest.getDeadline(),
                 ProjectStatus.valueOf(projectDTORequest.getProjectStatus().toUpperCase()),
@@ -29,8 +28,7 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
     @Override
     public ProjectDTORequest convertModelToDto(Project project) {
 
-        return new ProjectDTORequest(project.getProjectCode(),
-                project.getTitle(),
+        return new ProjectDTORequest(project.getTitle(),
                 project.getDescription(),
                 project.getDeadline(),
                 project.getProjectStatus().getProjectStatus(),

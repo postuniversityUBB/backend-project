@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +21,7 @@ import java.util.List;
 public class ProjectDTOResponse extends BaseDTO {
 
     @ApiModelProperty(notes = "The unique code of the project")
-    private String projectCode;
+    private UUID projectCode;
     private String title;
     private String description;
     private Date dateAdded;

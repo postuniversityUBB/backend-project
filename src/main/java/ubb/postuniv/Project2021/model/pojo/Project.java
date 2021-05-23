@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +24,7 @@ import java.util.List;
 public class Project extends BaseEntity<Long> {
 
     @Column(unique = true)
-    private String projectCode;
+    private UUID projectCode;
     private String title;
     private String description;
 
@@ -52,9 +53,8 @@ public class Project extends BaseEntity<Long> {
     }
 
 
-    public Project(String projectCode, String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode, List<Task> tasks) {
-
-        this.projectCode = projectCode;
+    public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode, List<Task> tasks) {
+        this.projectCode = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -64,8 +64,8 @@ public class Project extends BaseEntity<Long> {
         this.tasks = tasks;
     }
 
-    public Project(String projectCode, String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, List<Task> tasks) {
-        this.projectCode = projectCode;
+    public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, List<Task> tasks) {
+        this.projectCode = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -74,8 +74,8 @@ public class Project extends BaseEntity<Long> {
         this.tasks = tasks;
     }
 
-    public Project(String projectCode, String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode) {
-        this.projectCode = projectCode;
+    public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode) {
+        this.projectCode = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -84,8 +84,8 @@ public class Project extends BaseEntity<Long> {
         this.addedByUserCode = addedByUserCode;
     }
 
-    public Project(String projectCode, String title, String description, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode) {
-        this.projectCode = projectCode;
+    public Project(String title, String description, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode) {
+        this.projectCode = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.deadline = deadline;

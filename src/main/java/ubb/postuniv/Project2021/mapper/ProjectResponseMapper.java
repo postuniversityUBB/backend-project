@@ -22,8 +22,7 @@ public class ProjectResponseMapper extends AbstractMapper<Project, ProjectDTORes
 
         List<Task> taskList = taskMapper.convertDtosToModels(projectDTOResponse.getTasks());
 
-        return new Project(projectDTOResponse.getProjectCode(),
-                projectDTOResponse.getTitle(),
+        return new Project(projectDTOResponse.getTitle(),
                 projectDTOResponse.getDescription(),
                 projectDTOResponse.getDateAdded(),
                 projectDTOResponse.getDeadline(),

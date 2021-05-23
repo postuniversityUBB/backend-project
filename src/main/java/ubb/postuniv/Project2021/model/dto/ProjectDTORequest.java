@@ -17,9 +17,6 @@ import java.time.LocalDate;
 @ApiModel(description = "Details about the project")
 public class ProjectDTORequest extends BaseDTO {
 
-    @ApiModelProperty(notes = "The unique code of the project")
-    private String projectCode;
-
     private String title;
     private String description;
     private LocalDate deadline;
