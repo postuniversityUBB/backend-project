@@ -10,6 +10,7 @@ import ubb.postuniv.Project2021.mapper.Mapper;
 import ubb.postuniv.Project2021.model.dto.TaskDTORequest;
 import ubb.postuniv.Project2021.model.dto.TaskDTOResponse;
 import ubb.postuniv.Project2021.model.pojo.Task;
+import ubb.postuniv.Project2021.model.validator.Validator;
 import ubb.postuniv.Project2021.service.TaskService;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class TaskController {
     @Autowired
     Mapper<Task, TaskDTOResponse> taskResponseMapper;
 
+    @Autowired
+    private Validator<String> categoryValidator;
+
     @GetMapping("/tasks")
     public ResponseEntity<List<TaskDTOResponse>> showAllTasks() {
 
@@ -41,6 +45,8 @@ public class TaskController {
     public void addOneTask(@RequestBody TaskDTORequest taskDtoRequest) {
 
         log.info("taskDto ={}", taskDtoRequest);
+
+        categoryValidator.validate(taskDtoRequest.getTaskStatus());
 
         taskService.addTask(taskMapper.convertDtoToModel(taskDtoRequest));
     }
