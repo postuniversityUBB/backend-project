@@ -25,6 +25,7 @@ public class Project extends BaseEntity<Long> {
 
     @Column(unique = true)
     private UUID projectCode;
+
     private String title;
     private String description;
 

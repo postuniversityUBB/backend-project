@@ -13,6 +13,7 @@ import ubb.postuniv.Project2021.model.dto.ProjectDTOResponse;
 import ubb.postuniv.Project2021.model.dto.TaskDTORequest;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
+import ubb.postuniv.Project2021.model.validator.Validator;
 import ubb.postuniv.Project2021.service.ProjectService;
 
 import java.util.List;
@@ -32,9 +33,11 @@ public class ProjectController {
     @Autowired
     Mapper<Project, ProjectDTOResponse> projectResponseMapper;
 
-
     @Autowired
     Mapper<Task, TaskDTORequest> taskMapper;
+
+    @Autowired
+    private Validator<String> categoryValidator;
 
 
     @GetMapping("/projects")
@@ -49,6 +52,8 @@ public class ProjectController {
     public void addProject(@RequestBody ProjectDTORequest projectDtoRequest) {
 
         log.info("projectDto = {}", projectDtoRequest);
+
+        categoryValidator.validate(projectDtoRequest.getProjectStatus());
 
         projectService.addProject(projectMapper.convertDtoToModel(projectDtoRequest));
     }
