@@ -8,8 +8,6 @@ import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 
-import java.util.List;
-
 @Component
 public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
 
@@ -19,16 +17,23 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
     @Override
     public Project convertDtoToModel(ProjectDTORequest projectDTORequest) {
 
-        List<Task> taskList = taskMapper.convertDtosToModels(projectDTORequest.getTasks());
 
-        return new Project(projectDTORequest.getProjectCode(), projectDTORequest.getTitle(), projectDTORequest.getDescription(), projectDTORequest.getDateAdded(), projectDTORequest.getDeadline(), ProjectStatus.valueOf(projectDTORequest.getProjectStatus().toUpperCase()), projectDTORequest.getAddedByUserCode(), taskList);
+        return new Project(projectDTORequest.getProjectCode(),
+                projectDTORequest.getTitle(),
+                projectDTORequest.getDescription(),
+                projectDTORequest.getDeadline(),
+                ProjectStatus.valueOf(projectDTORequest.getProjectStatus().toUpperCase()),
+                projectDTORequest.getAddedByUserCode());
     }
 
     @Override
     public ProjectDTORequest convertModelToDto(Project project) {
 
-        List<TaskDTORequest> taskDTORequestList = taskMapper.convertModelsToDtos(project.getTasks());
-
-        return new ProjectDTORequest(project.getProjectCode(), project.getTitle(), project.getDescription(), project.getDateAdded(), project.getDeadline(), project.getProjectStatus().getProjectStatus(), project.getAddedByUserCode(), taskDTORequestList);
+        return new ProjectDTORequest(project.getProjectCode(),
+                project.getTitle(),
+                project.getDescription(),
+                project.getDeadline(),
+                project.getProjectStatus().getProjectStatus(),
+                project.getAddedByUserCode());
     }
 }

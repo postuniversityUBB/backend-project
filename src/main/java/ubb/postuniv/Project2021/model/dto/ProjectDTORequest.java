@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,12 +22,10 @@ public class ProjectDTORequest extends BaseDTO {
 
     private String title;
     private String description;
-    private LocalDate dateAdded;
     private LocalDate deadline;
     private String projectStatus;
 
     @ApiModelProperty(notes = "The unique code of the user that added the project")
     private String addedByUserCode;
 
-    private List<TaskDTORequest> tasks = new ArrayList<>();
 }

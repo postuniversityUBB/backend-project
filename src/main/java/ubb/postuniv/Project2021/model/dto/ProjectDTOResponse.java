@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,7 +23,7 @@ public class ProjectDTOResponse extends BaseDTO {
     private String projectCode;
     private String title;
     private String description;
-    private LocalDate dateAdded;
+    private Date dateAdded;
     private LocalDate deadline;
     private String projectStatus;
     private String createdBy;
