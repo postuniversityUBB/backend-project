@@ -6,10 +6,8 @@ import ubb.postuniv.Project2021.model.enums.TaskStatus;
 
 import java.util.Arrays;
 
-@Component
+@Component("taskCategoryValidator")
 public class TaskCategoryValidator implements Validator<String>{
-    public TaskCategoryValidator() {
-    }
 
     @Override
     public void validate(String categ) {

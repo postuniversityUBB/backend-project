@@ -4,6 +4,7 @@ package ubb.postuniv.Project2021.controller;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,12 @@ public class ProjectController {
     Mapper<Task, TaskDTORequest> taskMapper;
 
     @Autowired
+    @Qualifier("projectCategoryValidator")
     private Validator<String> categoryValidator;
+
+    @Autowired
+    @Qualifier("taskCategoryValidator")
+    private Validator<String> taskCategoryValidator;
 
 
     @GetMapping("/projects")
@@ -62,6 +68,8 @@ public class ProjectController {
     public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTORequest taskDtoRequest) {
 
         log.info("projectCode = {}, TaskDto = {}", projectCode, taskDtoRequest);
+
+        taskCategoryValidator.validate(taskDtoRequest.getTaskStatus());
 
         projectService.addTaskToProject(projectCode, taskMapper.convertDtoToModel(taskDtoRequest));
     }

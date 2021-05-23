@@ -6,7 +6,7 @@ import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 
 import java.util.Arrays;
 
-@Component
+@Component("projectCategoryValidator")
 public class ProjectCategoryValidator implements Validator<String> {
 
     @Override
