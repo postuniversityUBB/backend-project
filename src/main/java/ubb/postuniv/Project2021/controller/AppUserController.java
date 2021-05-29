@@ -39,7 +39,7 @@ public class AppUserController {
         return new ResponseEntity<>(appUserResponseMapper.convertModelsToDtos(appUserService.getAll()), HttpStatus.OK);
     }
 
-    @PostMapping("/users/register")
+    @PostMapping(path = "/users/register")
     public void addUser(@RequestBody AppUserDTORequest appUserDtoRequest) {
 
         log.info("appUserDto = {}", appUserDtoRequest);

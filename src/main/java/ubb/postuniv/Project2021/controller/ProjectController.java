@@ -55,7 +55,7 @@ public class ProjectController {
         return new ResponseEntity<>(projectResponseMapper.convertModelsToDtos(projectService.getAll()), HttpStatus.OK);
     }
 
-    @GetMapping("/projects/one/{projectCode}")
+    @GetMapping(path = "/projects/{projectCode}")
     public ResponseEntity<ProjectDTOResponse> showProject(@PathVariable String projectCode) {
 
         log.info("project = {}", projectService.getOneProject(UUID.fromString(projectCode)));
@@ -74,7 +74,7 @@ public class ProjectController {
         projectService.addProject(projectMapper.convertDtoToModel(projectDtoRequest));
     }
 
-    @PostMapping("projects/{projectCode}/tasks")
+    @PostMapping(path = "projects/{projectCode}/tasks")
     public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTORequest taskDtoRequest) {
 
         log.info("projectCode = {}, TaskDto = {}", projectCode, taskDtoRequest);
