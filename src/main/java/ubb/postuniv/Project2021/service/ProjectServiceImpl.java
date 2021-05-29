@@ -47,7 +47,8 @@ public class ProjectServiceImpl implements ProjectService {
 
         String username = authentication.getName();
 
-        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow();
+        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
+                new ItemNotFoundException("The user was not found"));
 
         project.setAppUser(appUser);
 
