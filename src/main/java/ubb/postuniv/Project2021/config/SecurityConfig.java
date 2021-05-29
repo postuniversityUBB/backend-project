@@ -19,7 +19,7 @@ import static ubb.postuniv.Project2021.security.model.SecurityConstants.ROLE_ADM
 import static ubb.postuniv.Project2021.security.model.SecurityConstants.SIGN_UP_URL;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
