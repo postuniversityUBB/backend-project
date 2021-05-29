@@ -13,7 +13,7 @@ public interface ProjectService {
 
     void addProject(Project project);
 
-    void addTaskToProject(UUID projectCode, Task task);
+    void addTaskToProject(String projectCode, Task task);
 
-    Project getOneProject(Long id);
+    Project getOneProject(String projectCode);
 }

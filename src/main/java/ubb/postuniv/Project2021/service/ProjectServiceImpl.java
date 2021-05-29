@@ -34,10 +34,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getOneProject(Long id) {
+    public Project getOneProject(String projectCode) {
 
-        return projectRepository.findById(id).orElseThrow(() ->
-                new ItemNotFoundException("The project with code " + id + " does not exist"));
+        return projectRepository.findByProjectCode(projectCode).orElseThrow(() ->
+                new ItemNotFoundException("The project with code " + projectCode + " does not exist"));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addTaskToProject(UUID projectCode, Task task) {
+    public void addTaskToProject(String projectCode, Task task) {
 
         Project project = projectRepository.findByProjectCode(projectCode).orElseThrow(() ->
                 new ItemNotFoundException("Project with code " + projectCode + " was not found"));

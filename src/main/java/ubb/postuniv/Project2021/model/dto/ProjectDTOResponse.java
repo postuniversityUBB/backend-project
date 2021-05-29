@@ -21,7 +21,7 @@ import java.util.UUID;
 public class ProjectDTOResponse extends BaseDTO {
 
     @ApiModelProperty(notes = "The unique code of the project")
-    private UUID projectCode;
+    private String projectCode;
     private String title;
     private String description;
     private Date dateAdded;

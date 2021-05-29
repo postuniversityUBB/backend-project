@@ -24,7 +24,7 @@ import java.util.UUID;
 public class Project extends BaseEntity<Long> {
 
     @Column(unique = true)
-    private UUID projectCode;
+    private String projectCode;
 
     private String title;
     private String description;
@@ -53,7 +53,7 @@ public class Project extends BaseEntity<Long> {
 
 
     public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, List<Task> tasks) {
-        this.projectCode = UUID.randomUUID();
+        this.projectCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -63,7 +63,7 @@ public class Project extends BaseEntity<Long> {
     }
 
     public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus) {
-        this.projectCode = UUID.randomUUID();
+        this.projectCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -73,7 +73,7 @@ public class Project extends BaseEntity<Long> {
     }
 
     public Project(String title, String description, LocalDate deadline, ProjectStatus projectStatus) {
-        this.projectCode = UUID.randomUUID();
+        this.projectCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
         this.deadline = deadline;

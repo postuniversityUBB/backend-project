@@ -55,12 +55,12 @@ public class ProjectController {
         return new ResponseEntity<>(projectResponseMapper.convertModelsToDtos(projectService.getAll()), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/projects/{id}")
-    public ResponseEntity<ProjectDTOResponse> showProject(@PathVariable Long id) {
+    @GetMapping(value = "/projects/{projectCode}")
+    public ResponseEntity<ProjectDTOResponse> showProject(@PathVariable String projectCode) {
 
-        //log.info("project = {}", projectService.getOneProject(UUID.fromString(projectCode)));
+        log.info("project = {}", projectService.getOneProject(projectCode));
 
-        return new ResponseEntity<>(projectResponseMapper.convertModelToDto(projectService.getOneProject(id)), HttpStatus.OK);
+        return new ResponseEntity<>(projectResponseMapper.convertModelToDto(projectService.getOneProject(projectCode)), HttpStatus.OK);
     }
 
 
@@ -81,7 +81,7 @@ public class ProjectController {
 
         taskCategoryValidator.validate(taskDtoRequest.getTaskStatus());
 
-        projectService.addTaskToProject(UUID.fromString(projectCode), taskMapper.convertDtoToModel(taskDtoRequest));
+        projectService.addTaskToProject(projectCode, taskMapper.convertDtoToModel(taskDtoRequest));
     }
 
 }
