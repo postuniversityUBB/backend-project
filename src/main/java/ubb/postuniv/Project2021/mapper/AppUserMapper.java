@@ -25,18 +25,27 @@ public class AppUserMapper extends AbstractMapper<AppUser, AppUserDTORequest> {
     @Override
     public AppUser convertDtoToModel(AppUserDTORequest appUserDTORequest) {
 
-        List<Project> projectList = projectMapper.convertDtosToModels(appUserDTORequest.getProjects());
-        List<Task> taskList = taskMapper.convertDtosToModels(appUserDTORequest.getTasks());
-
-        return new AppUser(appUserDTORequest.getUserCode(), appUserDTORequest.getFirstName(), appUserDTORequest.getLastName(), appUserDTORequest.getEmail(), appUserDTORequest.getPassword(), appUserDTORequest.isAdmin(), projectList, taskList);
+        return new AppUser(appUserDTORequest.getUserCode(),
+                appUserDTORequest.getFirstName(),
+                appUserDTORequest.getLastName(),
+                appUserDTORequest.getUsername(),
+                appUserDTORequest.getEmail(),
+                appUserDTORequest.getPassword(),
+                appUserDTORequest.isAdmin(),
+                appUserDTORequest.getRoles());
     }
 
     @Override
     public AppUserDTORequest convertModelToDto(AppUser appUser) {
 
-        List<ProjectDTORequest> projectDTORequestList = projectMapper.convertModelsToDtos(appUser.getProjects());
-        List<TaskDTORequest> taskDTORequestList = taskMapper.convertModelsToDtos(appUser.getTasks());
+        return new AppUserDTORequest(appUser.getUserCode(),
+                appUser.getFirstName(),
+                appUser.getLastName(),
+                appUser.getUsername(),
+                appUser.getEmail(),
+                appUser.getPassword(),
+                appUser.isAdmin(),
+                appUser.getRoles());
 
-        return new AppUserDTORequest(appUser.getUserCode(), appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword(), appUser.isAdmin(), projectDTORequestList, taskDTORequestList);
     }
 }

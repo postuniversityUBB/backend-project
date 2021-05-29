@@ -21,8 +21,7 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
         return new Project(projectDTORequest.getTitle(),
                 projectDTORequest.getDescription(),
                 projectDTORequest.getDeadline(),
-                ProjectStatus.valueOf(projectDTORequest.getProjectStatus().toUpperCase()),
-                projectDTORequest.getAddedByUserCode());
+                ProjectStatus.valueOf(projectDTORequest.getProjectStatus().toUpperCase()));
     }
 
     @Override
@@ -31,7 +30,6 @@ public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
         return new ProjectDTORequest(project.getTitle(),
                 project.getDescription(),
                 project.getDeadline(),
-                project.getProjectStatus().getProjectStatus(),
-                project.getAddedByUserCode());
+                project.getProjectStatus().getProjectStatus());
     }
 }

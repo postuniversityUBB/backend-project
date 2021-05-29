@@ -18,6 +18,7 @@ import ubb.postuniv.Project2021.model.validator.Validator;
 import ubb.postuniv.Project2021.service.ProjectService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -54,6 +55,15 @@ public class ProjectController {
         return new ResponseEntity<>(projectResponseMapper.convertModelsToDtos(projectService.getAll()), HttpStatus.OK);
     }
 
+    @GetMapping("/projects/{projectCode}")
+    public ResponseEntity<ProjectDTOResponse> showProject(@PathVariable String projectCode) {
+
+        log.info("project = {}", projectService.getOneProject(UUID.fromString(projectCode)));
+
+        return new ResponseEntity<>(projectResponseMapper.convertModelToDto(projectService.getOneProject(UUID.fromString(projectCode))), HttpStatus.OK);
+    }
+
+
     @PostMapping("/projects")
     public void addProject(@RequestBody ProjectDTORequest projectDtoRequest) {
 
@@ -71,7 +81,7 @@ public class ProjectController {
 
         taskCategoryValidator.validate(taskDtoRequest.getTaskStatus());
 
-        projectService.addTaskToProject(projectCode, taskMapper.convertDtoToModel(taskDtoRequest));
+        projectService.addTaskToProject(UUID.fromString(projectCode), taskMapper.convertDtoToModel(taskDtoRequest));
     }
 
 }

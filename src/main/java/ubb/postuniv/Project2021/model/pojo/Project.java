@@ -38,8 +38,6 @@ public class Project extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
 
-    private String addedByUserCode;
-
     @ManyToOne
     AppUser appUser;
 
@@ -54,17 +52,6 @@ public class Project extends BaseEntity<Long> {
     }
 
 
-    public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode, List<Task> tasks) {
-        this.projectCode = UUID.randomUUID();
-        this.title = title;
-        this.description = description;
-        this.dateAdded = dateAdded;
-        this.deadline = deadline;
-        this.projectStatus = projectStatus;
-        this.addedByUserCode = addedByUserCode;
-        this.tasks = tasks;
-    }
-
     public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, List<Task> tasks) {
         this.projectCode = UUID.randomUUID();
         this.title = title;
@@ -75,22 +62,22 @@ public class Project extends BaseEntity<Long> {
         this.tasks = tasks;
     }
 
-    public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode) {
+    public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus) {
         this.projectCode = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
         this.deadline = deadline;
         this.projectStatus = projectStatus;
-        this.addedByUserCode = addedByUserCode;
+
     }
 
-    public Project(String title, String description, LocalDate deadline, ProjectStatus projectStatus, String addedByUserCode) {
+    public Project(String title, String description, LocalDate deadline, ProjectStatus projectStatus) {
         this.projectCode = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.deadline = deadline;
         this.projectStatus = projectStatus;
-        this.addedByUserCode = addedByUserCode;
+
     }
 }

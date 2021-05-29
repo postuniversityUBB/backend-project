@@ -7,9 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ubb.postuniv.Project2021.model.pojo.Role;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -24,22 +25,23 @@ public class AppUserDTORequest extends BaseDTO {
 
     private String firstName;
     private String lastName;
+
+    private String username;
     private String email;
     private String password;
     private boolean isAdmin;
-    private List<ProjectDTORequest> projects = new ArrayList<>();
-    private List<TaskDTORequest> tasks = new ArrayList<>();
-
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public String toString() {
-        return "userCode='" + userCode + '\'' +
+        return "AppUserDTORequest{" +
+                "userCode='" + userCode + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", isAdmin=" + isAdmin +
-                ", projects=" + projects +
-                ", tasks=" + tasks;
-
+                ", roles=" + roles;
     }
 }

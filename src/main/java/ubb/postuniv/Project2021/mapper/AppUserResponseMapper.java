@@ -28,7 +28,14 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
         List<Project> projectList = projectMapper.convertDtosToModels(appUserDTOResponse.getProjects());
         List<Task> taskList = taskMapper.convertDtosToModels(appUserDTOResponse.getTasks());
 
-        return new AppUser(appUserDTOResponse.getUserCode(), appUserDTOResponse.getFirstName(), appUserDTOResponse.getLastName(), appUserDTOResponse.getEmail(), appUserDTOResponse.isAdmin(), projectList, taskList, appUserDTOResponse.getCreatedAt());
+        return new AppUser(appUserDTOResponse.getUserCode(),
+                appUserDTOResponse.getFirstName(),
+                appUserDTOResponse.getLastName(),
+                appUserDTOResponse.getUsername(),
+                appUserDTOResponse.getEmail(),
+                appUserDTOResponse.isAdmin(),
+                projectList, taskList,
+                appUserDTOResponse.getCreatedAt());
     }
 
     @Override
@@ -37,6 +44,15 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
         List<ProjectDTOResponse> projectDTORequestList = projectMapper.convertModelsToDtos(appUser.getProjects());
         List<TaskDTOResponse> taskDTORequestList = taskMapper.convertModelsToDtos(appUser.getTasks());
 
-        return new AppUserDTOResponse(appUser.getUserCode(), appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.isAdmin(), projectDTORequestList, taskDTORequestList, appUser.getCreatedAt());
+        return new AppUserDTOResponse(appUser.getUserCode(),
+                appUser.getFirstName(),
+                appUser.getLastName(),
+                appUser.getUsername(),
+                appUser.getEmail(),
+                appUser.isAdmin(),
+                appUser.getRoles(),
+                projectDTORequestList,
+                taskDTORequestList,
+                appUser.getCreatedAt());
     }
 }

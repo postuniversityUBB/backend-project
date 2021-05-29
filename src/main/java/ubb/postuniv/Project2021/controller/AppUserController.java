@@ -39,12 +39,12 @@ public class AppUserController {
         return new ResponseEntity<>(appUserResponseMapper.convertModelsToDtos(appUserService.getAll()), HttpStatus.OK);
     }
 
-    @PostMapping("/users")
+    @PostMapping("/users/register")
     public void addUser(@RequestBody AppUserDTORequest appUserDtoRequest) {
 
         log.info("appUserDto = {}", appUserDtoRequest);
 
-        appUserService.addUSer(appUserMapper.convertDtoToModel(appUserDtoRequest));
+        appUserService.addUser(appUserMapper.convertDtoToModel(appUserDtoRequest));
     }
 
 }

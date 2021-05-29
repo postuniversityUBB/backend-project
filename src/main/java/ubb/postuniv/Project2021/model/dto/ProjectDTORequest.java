@@ -22,7 +22,4 @@ public class ProjectDTORequest extends BaseDTO {
     private LocalDate deadline;
     private String projectStatus;
 
-    @ApiModelProperty(notes = "The unique code of the user that added the project")
-    private String addedByUserCode;
-
 }

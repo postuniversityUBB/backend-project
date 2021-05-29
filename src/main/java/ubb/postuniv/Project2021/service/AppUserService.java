@@ -1,12 +1,13 @@
 package ubb.postuniv.Project2021.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
 
 import java.util.List;
 
-public interface AppUserService {
+public interface AppUserService extends UserDetailsService {
 
     List<AppUser> getAll();
 
-    void addUSer(AppUser appUser);
+    void addUser(AppUser appUser);
 }

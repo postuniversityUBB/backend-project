@@ -3,10 +3,9 @@ package ubb.postuniv.Project2021.model.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import ubb.postuniv.Project2021.model.pojo.Role;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @NoArgsConstructor
@@ -21,8 +20,10 @@ public class AppUserDTOResponse extends BaseDTO {
     private String userCode;
     private String firstName;
     private String lastName;
+    private String username;
     private String email;
     private boolean isAdmin;
+    private Set<Role> roles = new HashSet<>();
     private List<ProjectDTOResponse> projects = new ArrayList<>();
     private List<TaskDTOResponse> tasks = new ArrayList<>();
     private Date createdAt;

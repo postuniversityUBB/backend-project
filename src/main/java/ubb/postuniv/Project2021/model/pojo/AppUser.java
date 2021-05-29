@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +20,11 @@ public class AppUser extends BaseEntity<Long> {
 
     @Column(unique = true)
     private String userCode;
+
     private String firstName;
     private String lastName;
+
+    private String username;
     private String email;
     private String password;
     private boolean isAdmin;
@@ -35,19 +35,49 @@ public class AppUser extends BaseEntity<Long> {
     @OneToMany(mappedBy = "assignedTo")
     private List<Task> tasks = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date createdAt;
 
-    public AppUser(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+    @PrePersist
+    private void onCreate() {
+
+        createdAt = new Date();
     }
 
-    public AppUser(String userCode, String firstName, String lastName, String email, boolean isAdmin, List<Project> projects, List<Task> tasks, Date createdAt) {
+    public AppUser(String userCode, String username, String password, Set<Role> roles) {
+        this.userCode = userCode;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public AppUser(String userCode, String firstName, String lastName, String username, String email, String password, boolean isAdmin, Set<Role> roles) {
         this.userCode = userCode;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.roles = roles;
+    }
+
+    public AppUser(String userCode, String firstName, String lastName, String username, String email, boolean isAdmin, List<Project> projects, List<Task> tasks, Date createdAt) {
+        this.userCode = userCode;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
         this.email = email;
         this.isAdmin = isAdmin;
         this.projects = projects;
@@ -64,12 +94,6 @@ public class AppUser extends BaseEntity<Long> {
         this.isAdmin = isAdmin;
         this.projects = projects;
         this.tasks = tasks;
-    }
-
-    @PrePersist
-    private void onCreate() {
-
-        createdAt = new Date();
     }
 
     @Override
