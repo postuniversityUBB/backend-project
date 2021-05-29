@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    Optional<Project> findByProjectCode(UUID projectCode);
+    Optional<Project> findProjectByProjectCode(UUID projectCode);
 
 }

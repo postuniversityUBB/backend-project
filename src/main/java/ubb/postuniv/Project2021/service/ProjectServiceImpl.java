@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project getOneProject(UUID projectCode) {
 
-        return projectRepository.findByProjectCode(projectCode).orElseThrow(() ->
+        return projectRepository.findProjectByProjectCode(projectCode).orElseThrow(() ->
                 new ItemNotFoundException("The project with code " + projectCode + " does not exist"));
     }
 
@@ -48,7 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
         String username = authentication.getName();
 
         AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
-                new ItemNotFoundException("The user was not found"));
+                new ItemNotFoundException("The user " + username + " was not found"));
 
         project.setAppUser(appUser);
 
@@ -62,7 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void addTaskToProject(UUID projectCode, Task task) {
 
-        Project project = projectRepository.findByProjectCode(projectCode).orElseThrow(() ->
+        Project project = projectRepository.findProjectByProjectCode(projectCode).orElseThrow(() ->
                 new ItemNotFoundException("Project with code " + projectCode + " was not found"));
 
         project.getTasks().add(task);
