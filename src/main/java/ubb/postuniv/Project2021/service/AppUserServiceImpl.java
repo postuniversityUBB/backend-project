@@ -41,7 +41,7 @@ public class AppUserServiceImpl implements AppUserService {
 
         Optional<AppUser> optionalAppUser = appUserRepository.findByUsername(username);
 
-        if (optionalAppUser.isEmpty()) {
+        if (!optionalAppUser.isPresent()) {
 
             throw new UsernameNotFoundException("Could not find user");
         }
