@@ -22,9 +22,6 @@ public class TaskDTORequest extends BaseDTO {
     private LocalDate deadline;
     private String taskStatus;
 
-    @ApiModelProperty(notes = "The unique code of the user that added the task")
-    private String createdByUserCode;
-
     @ApiModelProperty(notes = "The unique code of the user that the task was assigned to")
     private String assignedToUserCode;
 
@@ -35,7 +32,6 @@ public class TaskDTORequest extends BaseDTO {
                 ", dateAdded=" + dateAdded +
                 ", deadline=" + deadline +
                 ", taskStatus=" + taskStatus +
-                ", createdByUserCode='" + createdByUserCode + '\'' +
                 ", assignedToUserCode='" + assignedToUserCode + '\'';
     }
 }

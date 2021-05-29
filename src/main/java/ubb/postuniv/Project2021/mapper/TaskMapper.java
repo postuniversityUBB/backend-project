@@ -11,12 +11,22 @@ public class TaskMapper extends AbstractMapper<Task, TaskDTORequest> {
     @Override
     public Task convertDtoToModel(TaskDTORequest taskDTORequest) {
 
-        return new Task(taskDTORequest.getTitle(), taskDTORequest.getDescription(), taskDTORequest.getDateAdded(), taskDTORequest.getDeadline(), TaskStatus.valueOf(taskDTORequest.getTaskStatus().toUpperCase()), taskDTORequest.getCreatedByUserCode(), taskDTORequest.getAssignedToUserCode());
+        return new Task(taskDTORequest.getTitle(),
+                taskDTORequest.getDescription(),
+                taskDTORequest.getDateAdded(),
+                taskDTORequest.getDeadline(),
+                TaskStatus.valueOf(taskDTORequest.getTaskStatus().toUpperCase()),
+                taskDTORequest.getAssignedToUserCode());
     }
 
     @Override
     public TaskDTORequest convertModelToDto(Task task) {
 
-        return new TaskDTORequest(task.getTitle(), task.getDescription(), task.getDateAdded(), task.getDeadline(), task.getTaskStatus().getTaskStatus(), task.getCreatedByUserCode(), task.getAssignedToUserCode());
+        return new TaskDTORequest(task.getTitle(),
+                task.getDescription(),
+                task.getDateAdded(),
+                task.getDeadline(),
+                task.getTaskStatus().getTaskStatus(),
+                task.getAssignedToUserCode());
     }
 }

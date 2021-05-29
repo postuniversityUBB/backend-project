@@ -68,15 +68,26 @@ public class ProjectServiceImpl implements ProjectService {
         project.getTasks().add(task);
         task.setProject(project);
 
-        AppUser createdByUser = appUserRepository.findByUserCode(task.getCreatedByUserCode()).orElseThrow(() ->
-                new ItemNotFoundException("User with code " + task.getCreatedByUserCode() + " was not found"));
+        AppUser createdByUser = getAuthenticatedUser();
 
         AppUser assignedToUser = appUserRepository.findByUserCode(task.getAssignedToUserCode()).orElseThrow(() ->
-                new ItemNotFoundException("User with code " + task.getCreatedByUserCode() + " was not found"));
+                new ItemNotFoundException("User with code " + task.getAssignedToUserCode() + " was not found"));
 
         task.setCreatedBy(createdByUser);
         task.setAssignedTo(assignedToUser);
 
         projectRepository.save(project);
+    }
+
+    private AppUser getAuthenticatedUser() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+
+        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
+                new ItemNotFoundException("User with username " + username + " was not found"));
+
+        return appUser;
     }
 }

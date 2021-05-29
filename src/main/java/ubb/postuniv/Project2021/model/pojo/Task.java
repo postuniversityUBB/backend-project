@@ -24,7 +24,6 @@ public class    Task extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private TaskStatus taskStatus;
 
-    private String createdByUserCode;
     private String assignedToUserCode;
 
     @ManyToOne
@@ -36,15 +35,6 @@ public class    Task extends BaseEntity<Long> {
     @ManyToOne
     AppUser assignedTo;
 
-    public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus, String createdByUserCode, String assignedToUserCode) {
-        this.title = title;
-        this.description = description;
-        this.dateAdded = dateAdded;
-        this.deadline = deadline;
-        this.taskStatus = taskStatus;
-        this.createdByUserCode = createdByUserCode;
-        this.assignedToUserCode = assignedToUserCode;
-    }
 
     public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus) {
         this.title = title;
@@ -52,5 +42,14 @@ public class    Task extends BaseEntity<Long> {
         this.dateAdded = dateAdded;
         this.deadline = deadline;
         this.taskStatus = taskStatus;
+    }
+
+    public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus, String assignedToUserCode) {
+        this.title = title;
+        this.description = description;
+        this.dateAdded = dateAdded;
+        this.deadline = deadline;
+        this.taskStatus = taskStatus;
+        this.assignedToUserCode = assignedToUserCode;
     }
 }

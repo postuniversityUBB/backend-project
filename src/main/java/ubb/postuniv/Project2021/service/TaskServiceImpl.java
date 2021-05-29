@@ -2,6 +2,8 @@ package ubb.postuniv.Project2021.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ubb.postuniv.Project2021.exception.ItemNotFoundException;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
@@ -30,11 +32,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void addTask(Task task) {
 
-        AppUser createdByUser = appUserRepository.findByUserCode(task.getCreatedByUserCode()).orElseThrow(() ->
-                new ItemNotFoundException("User with code " + task.getCreatedByUserCode() + " was not found"));
+        AppUser createdByUser = getAuthenticatedUser();
 
         AppUser assignedToUser = appUserRepository.findByUserCode(task.getAssignedToUserCode()).orElseThrow(() ->
-                new ItemNotFoundException("User with code " + task.getCreatedByUserCode() + " was not found"));
+                new ItemNotFoundException("User with code " + task.getAssignedToUserCode() + " was not found"));
 
         assignedToUser.getTasks().add(task);
 
@@ -42,6 +43,18 @@ public class TaskServiceImpl implements TaskService {
 
         appUserRepository.save(assignedToUser);
 
+    }
+
+    private AppUser getAuthenticatedUser() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+
+        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
+                new ItemNotFoundException("User with code " + username + " was not found"));
+
+        return appUser;
     }
 
 }
