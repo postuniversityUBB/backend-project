@@ -19,7 +19,7 @@ import static ubb.postuniv.Project2021.security.model.SecurityConstants.ROLE_ADM
 import static ubb.postuniv.Project2021.security.model.SecurityConstants.SIGN_UP_URL;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,17 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        http.authorizeRequests().anyRequest().permitAll();
-//                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-//                .antMatchers(HttpMethod.POST).hasAuthority(ROLE_ADMIN)
-//                .antMatchers(HttpMethod.PUT).hasAuthority(ROLE_ADMIN)
-//                .antMatchers(HttpMethod.DELETE).hasAuthority(ROLE_ADMIN)
-//                .anyRequest().authenticated()
-//                .and()
-//                .addFilter(new JWTAuthenticationFilter(authenticationManagerBean()))
-//                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-//                // this disables session creation on Spring Security
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.POST).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.PUT).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.DELETE).hasAuthority(ROLE_ADMIN)
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(new JWTAuthenticationFilter(authenticationManagerBean()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                // this disables session creation on Spring Security
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
 
