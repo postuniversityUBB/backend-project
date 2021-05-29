@@ -55,12 +55,12 @@ public class ProjectController {
         return new ResponseEntity<>(projectResponseMapper.convertModelsToDtos(projectService.getAll()), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/projects/{projectCode}")
-    public ResponseEntity<ProjectDTOResponse> showProject(@PathVariable String projectCode) {
+    @GetMapping(value = "/projects/{id}")
+    public ResponseEntity<ProjectDTOResponse> showProject(@PathVariable Long id) {
 
-        log.info("project = {}", projectService.getOneProject(UUID.fromString(projectCode)));
+        //log.info("project = {}", projectService.getOneProject(UUID.fromString(projectCode)));
 
-        return new ResponseEntity<>(projectResponseMapper.convertModelToDto(projectService.getOneProject(UUID.fromString(projectCode))), HttpStatus.OK);
+        return new ResponseEntity<>(projectResponseMapper.convertModelToDto(projectService.getOneProject(id)), HttpStatus.OK);
     }
 
 

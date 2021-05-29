@@ -15,5 +15,5 @@ public interface ProjectService {
 
     void addTaskToProject(UUID projectCode, Task task);
 
-    Project getOneProject(UUID projectCode);
+    Project getOneProject(Long id);
 }

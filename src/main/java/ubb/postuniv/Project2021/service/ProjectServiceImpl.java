@@ -34,10 +34,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getOneProject(UUID projectCode) {
+    public Project getOneProject(Long id) {
 
-        return projectRepository.findByProjectCode(projectCode).orElseThrow(() ->
-                new ItemNotFoundException("The project with code " + projectCode + " does not exist"));
+        return projectRepository.findById(id).orElseThrow(() ->
+                new ItemNotFoundException("The project with code " + id + " does not exist"));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
         String username = authentication.getName();
 
         AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
-                new ItemNotFoundException("The user " + username + " was not found"));
+                new ItemNotFoundException("The user " + username + " was not found. Please register."));
 
         project.setAppUser(appUser);
 
