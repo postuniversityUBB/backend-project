@@ -16,4 +16,6 @@ public interface ProjectService {
     void addTaskToProject(String projectCode, Task task);
 
     Project getOneProject(String projectCode);
+
+    void deleteProject(String projectCode);
 }

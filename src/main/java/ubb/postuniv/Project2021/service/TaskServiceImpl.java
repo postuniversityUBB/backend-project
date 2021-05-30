@@ -12,6 +12,7 @@ import ubb.postuniv.Project2021.repository.AppUserRepository;
 import ubb.postuniv.Project2021.repository.TaskRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -43,6 +44,18 @@ public class TaskServiceImpl implements TaskService {
 
         appUserRepository.save(assignedToUser);
 
+    }
+
+    @Override
+    public void deleteTask(Long taskId) {
+
+        Optional<Task> task = taskRepository.findById(taskId);
+
+        if(!task.isPresent()){
+            throw new ItemNotFoundException("Task with id code" + taskId + " not found");
+        }else{
+            taskRepository.delete(task.get());
+        }
     }
 
     private AppUser getAuthenticatedUser() {

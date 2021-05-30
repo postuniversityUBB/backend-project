@@ -37,6 +37,17 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public void deleteUser(String userCode) {
+        Optional<AppUser> user = appUserRepository.findByUserCode(userCode);
+
+        if(!user.isPresent()){
+            throw new UsernameNotFoundException("Could not find user");
+        }else{
+            appUserRepository.delete(user.get());
+        }
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) {
 
         Optional<AppUser> optionalAppUser = appUserRepository.findByUsername(username);

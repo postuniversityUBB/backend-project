@@ -15,6 +15,7 @@ import ubb.postuniv.Project2021.repository.ProjectRepository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -38,6 +39,17 @@ public class ProjectServiceImpl implements ProjectService {
 
         return projectRepository.findByProjectCode(projectCode).orElseThrow(() ->
                 new ItemNotFoundException("The project with code " + projectCode + " does not exist"));
+    }
+
+    @Override
+    public void deleteProject(String projectCode) {
+        Optional<Project> project = projectRepository.findByProjectCode(projectCode);
+
+        if(!project.isPresent()) {
+           throw new ItemNotFoundException("The project with code " + projectCode + " does not exist");
+        }else{
+            projectRepository.delete(project.get());
+        }
     }
 
     @Override

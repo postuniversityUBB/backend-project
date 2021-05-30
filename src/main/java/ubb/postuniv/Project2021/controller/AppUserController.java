@@ -39,6 +39,12 @@ public class AppUserController {
         return new ResponseEntity<>(appUserResponseMapper.convertModelsToDtos(appUserService.getAll()), HttpStatus.OK);
     }
 
+    @DeleteMapping("/users/{userCode}")
+    public void removeUser(@PathVariable String userCode){
+        appUserService.deleteUser(userCode);
+    }
+
+
     @PostMapping(path = "/users/register")
     public void addUser(@RequestBody AppUserDTORequest appUserDtoRequest) {
 

@@ -10,5 +10,7 @@ public interface TaskService {
 
     void addTask(Task task);
 
+    void deleteTask(Long taskId);
+
     //void addTaskToUser(String userCode, Task task);
 }

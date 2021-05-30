@@ -43,6 +43,11 @@ public class TaskController {
         return new ResponseEntity<>(taskResponseMapper.convertModelsToDtos(taskService.getAll()), HttpStatus.OK);
     }
 
+    @DeleteMapping("/tasks/{taskId}")
+    public void removeTask(@PathVariable Long taskId){
+        taskService.deleteTask(taskId);
+    }
+
     @PostMapping("/tasks")
     public void addOneTask(@RequestBody TaskDTORequest taskDtoRequest) {
 

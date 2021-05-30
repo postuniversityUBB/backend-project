@@ -10,4 +10,6 @@ public interface AppUserService extends UserDetailsService {
     List<AppUser> getAll();
 
     void addUser(AppUser appUser);
+
+    void deleteUser(String userCode);
 }

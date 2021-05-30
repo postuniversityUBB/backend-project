@@ -74,6 +74,12 @@ public class ProjectController {
         projectService.addProject(projectMapper.convertDtoToModel(projectDtoRequest));
     }
 
+    @DeleteMapping("/projects/{projectCode}")
+    public void removeProject(@PathVariable String projectCode){
+        projectService.deleteProject(projectCode);
+    }
+
+
     @PostMapping("projects/{projectCode}/tasks")
     public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTORequest taskDtoRequest) {
 
@@ -83,5 +89,6 @@ public class ProjectController {
 
         projectService.addTaskToProject(projectCode, taskMapper.convertDtoToModel(taskDtoRequest));
     }
+
 
 }
