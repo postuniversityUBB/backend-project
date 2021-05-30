@@ -18,4 +18,6 @@ public interface ProjectService {
     Project getOneProject(String projectCode);
 
     void deleteProject(String projectCode);
+
+    void updateProject(Project project, String projectCode);
 }

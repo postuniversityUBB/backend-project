@@ -3,7 +3,6 @@ package ubb.postuniv.Project2021.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ubb.postuniv.Project2021.exception.ItemNotFoundException;
@@ -13,10 +12,8 @@ import ubb.postuniv.Project2021.model.pojo.Task;
 import ubb.postuniv.Project2021.repository.AppUserRepository;
 import ubb.postuniv.Project2021.repository.ProjectRepository;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -49,6 +46,31 @@ public class ProjectServiceImpl implements ProjectService {
            throw new ItemNotFoundException("The project with code " + projectCode + " does not exist");
         }else{
             projectRepository.delete(project.get());
+        }
+    }
+
+    @Override
+    public void updateProject(Project project, String projectCode) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
+                new ItemNotFoundException("The user " + username + " was not found. Please register."));
+
+        project.setAppUser(appUser);
+        Optional<Project> projectFound = projectRepository.findByProjectCode(projectCode);
+
+        if(!projectFound.isPresent()){
+            throw new ItemNotFoundException("Project with the code" + projectCode + " not found");
+        }else{
+            projectFound.get().setId(project.getId());
+            projectFound.get().setTitle(project.getTitle());
+            projectFound.get().setDescription(project.getDescription());
+            projectFound.get().setAppUser(appUser);
+            projectFound.get().setDeadline(project.getDeadline());
+            projectFound.get().setDateAdded(project.getDateAdded());
+            projectFound.get().setProjectStatus(project.getProjectStatus());
+            projectRepository.save(projectFound.get());
         }
     }
 

@@ -79,6 +79,15 @@ public class ProjectController {
         projectService.deleteProject(projectCode);
     }
 
+    @PutMapping("/projects/{projectCode}")
+    public void updateProject(@RequestBody ProjectDTORequest projectDtoRequest, @PathVariable String projectCode){
+
+        log.info("projectDto = {}", projectDtoRequest);
+
+        categoryValidator.validate(projectDtoRequest.getProjectStatus());
+
+        projectService.updateProject(projectMapper.convertDtoToModel(projectDtoRequest), projectCode);
+    }
 
     @PostMapping("projects/{projectCode}/tasks")
     public void addTaskToProject(@ApiParam(value = "The project code for which you want to add a task", required = true) @PathVariable String projectCode, @RequestBody TaskDTORequest taskDtoRequest) {
