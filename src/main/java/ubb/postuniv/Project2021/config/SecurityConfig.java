@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ubb.postuniv.Project2021.security.filter.JWTAuthenticationFilter;
 import ubb.postuniv.Project2021.security.filter.JWTAuthorizationFilter;
 import ubb.postuniv.Project2021.service.AppUserService;
@@ -31,11 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-                .antMatchers(HttpMethod.POST).hasAuthority(ROLE_ADMIN)
-                .antMatchers(HttpMethod.PUT).hasAuthority(ROLE_ADMIN)
-                .antMatchers(HttpMethod.DELETE).hasAuthority(ROLE_ADMIN)
+        http.cors().and().authorizeRequests()
+                .mvcMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .mvcMatchers(HttpMethod.POST).hasAuthority(ROLE_ADMIN)
+                .mvcMatchers(HttpMethod.PUT).hasAuthority(ROLE_ADMIN)
+                .mvcMatchers(HttpMethod.DELETE).hasAuthority(ROLE_ADMIN)
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManagerBean()))
@@ -61,5 +64,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(appUserService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+
+        return source;
     }
 }
