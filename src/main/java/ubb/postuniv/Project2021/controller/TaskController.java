@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ubb.postuniv.Project2021.mapper.Mapper;
+import ubb.postuniv.Project2021.model.dto.ProjectDTORequest;
 import ubb.postuniv.Project2021.model.dto.TaskDTORequest;
 import ubb.postuniv.Project2021.model.dto.TaskDTOResponse;
 import ubb.postuniv.Project2021.model.pojo.Task;
@@ -46,6 +47,17 @@ public class TaskController {
     @DeleteMapping("/tasks/{taskId}")
     public void removeTask(@PathVariable Long taskId){
         taskService.deleteTask(taskId);
+    }
+
+    @PutMapping("/tasks/{taskId}")
+    public void updateTask(@RequestBody TaskDTORequest taskDtoRequest, @PathVariable Long taskId){
+
+        log.info("taskDto ={}", taskDtoRequest);
+
+        categoryValidator.validate(taskDtoRequest.getTaskStatus());
+
+        taskService.updateTask(taskMapper.convertDtoToModel(taskDtoRequest), taskId);
+
     }
 
     @PostMapping("/tasks")
