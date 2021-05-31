@@ -19,8 +19,8 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .paths(PathSelectors.ant("/api/*"))
-                .apis(RequestHandlerSelectors.basePackage("ubb.postuniv"))
+                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.any())
                 .build()
                 .apiInfo(apiDetails());
     }
