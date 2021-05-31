@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.cors().and().authorizeRequests()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .mvcMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .mvcMatchers(HttpMethod.POST).hasAuthority(ROLE_ADMIN)
                 .mvcMatchers(HttpMethod.PUT).hasAuthority(ROLE_ADMIN)
@@ -75,4 +76,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return source;
     }
+
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+            // other public endpoints of your API may be appended to this array
+    };
 }
