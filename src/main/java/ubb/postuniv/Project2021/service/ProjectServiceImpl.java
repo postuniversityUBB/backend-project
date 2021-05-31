@@ -40,29 +40,39 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProject(String projectCode) {
+
         Optional<Project> project = projectRepository.findByProjectCode(projectCode);
 
-        if(!project.isPresent()) {
-           throw new ItemNotFoundException("The project with code " + projectCode + " does not exist");
-        }else{
+        if (!project.isPresent()) {
+
+            throw new ItemNotFoundException("The project with code " + projectCode + " does not exist");
+
+        } else {
+
             projectRepository.delete(project.get());
         }
     }
 
     @Override
     public void updateProject(Project project, String projectCode) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getName();
+
         AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
                 new ItemNotFoundException("The user " + username + " was not found. Please register."));
 
         project.setAppUser(appUser);
+
         Optional<Project> projectFound = projectRepository.findByProjectCode(projectCode);
 
-        if(!projectFound.isPresent()){
+        if (!projectFound.isPresent()) {
+
             throw new ItemNotFoundException("Project with the code" + projectCode + " not found");
-        }else{
+
+        } else {
+
             projectFound.get().setId(project.getId());
             projectFound.get().setTitle(project.getTitle());
             projectFound.get().setDescription(project.getDescription());
@@ -70,6 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectFound.get().setDeadline(project.getDeadline());
             projectFound.get().setDateAdded(project.getDateAdded());
             projectFound.get().setProjectStatus(project.getProjectStatus());
+
             projectRepository.save(projectFound.get());
         }
     }

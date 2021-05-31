@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ubb.postuniv.Project2021.exception.ItemNotFoundException;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
-import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 import ubb.postuniv.Project2021.repository.AppUserRepository;
 import ubb.postuniv.Project2021.repository.TaskRepository;
@@ -52,9 +51,12 @@ public class TaskServiceImpl implements TaskService {
 
         Optional<Task> task = taskRepository.findById(taskId);
 
-        if(!task.isPresent()){
+        if (!task.isPresent()) {
+
             throw new ItemNotFoundException("Task with id code" + taskId + " not found");
-        }else{
+
+        } else {
+
             taskRepository.delete(task.get());
         }
     }
@@ -64,15 +66,19 @@ public class TaskServiceImpl implements TaskService {
 
         Optional<Task> taskFound = taskRepository.findById(taskId);
 
-        if(!taskFound.isPresent()) {
+        if (!taskFound.isPresent()) {
+
             throw new ItemNotFoundException("Sorry, the task with id " + taskId + " can't be found!");
-        }else {
+
+        } else {
+
             taskFound.get().setTitle(task.getTitle());
             taskFound.get().setDescription(task.getDescription());
             taskFound.get().setDateAdded(task.getDateAdded());
             taskFound.get().setAssignedToUserCode(task.getAssignedToUserCode());
             taskFound.get().setDeadline(task.getDeadline());
             taskFound.get().setTaskStatus(task.getTaskStatus());
+
             taskRepository.save(taskFound.get());
         }
     }

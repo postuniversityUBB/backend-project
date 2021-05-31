@@ -76,6 +76,7 @@ public class ProjectController {
 
     @DeleteMapping("/projects/{projectCode}")
     public void removeProject(@PathVariable String projectCode){
+
         projectService.deleteProject(projectCode);
     }
 
