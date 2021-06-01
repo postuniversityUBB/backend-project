@@ -18,6 +18,8 @@ import ubb.postuniv.Project2021.security.filter.JWTAuthenticationFilter;
 import ubb.postuniv.Project2021.security.filter.JWTAuthorizationFilter;
 import ubb.postuniv.Project2021.service.AppUserService;
 
+import java.util.Arrays;
+
 import static ubb.postuniv.Project2021.security.model.SecurityConstants.ROLE_ADMIN;
 import static ubb.postuniv.Project2021.security.model.SecurityConstants.SIGN_UP_URL;
 
@@ -72,6 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+
         source.registerCorsConfiguration("/**", corsConfiguration);
 
         return source;
