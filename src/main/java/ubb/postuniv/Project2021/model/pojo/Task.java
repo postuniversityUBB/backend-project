@@ -8,13 +8,17 @@ import ubb.postuniv.Project2021.model.enums.TaskStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tasks")
-public class    Task extends BaseEntity<Long> {
+public class Task extends BaseEntity<Long> {
+
+    @Column(unique = true)
+    private String taskCode;
 
     private String title;
     private String description;
@@ -37,6 +41,7 @@ public class    Task extends BaseEntity<Long> {
 
 
     public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus) {
+        this.taskCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -45,6 +50,7 @@ public class    Task extends BaseEntity<Long> {
     }
 
     public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus, String assignedToUserCode) {
+        this.taskCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;

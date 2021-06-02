@@ -25,7 +25,8 @@ public class TaskResponseMapper extends AbstractMapper<Task, TaskDTOResponse> {
         String createdBy = task.getCreatedBy().getFirstName() + " " + task.getCreatedBy().getLastName();
         String assignedTo = task.getAssignedTo().getFirstName() + " " +  task.getAssignedTo().getLastName();
 
-        return new TaskDTOResponse(task.getTitle(),
+        return new TaskDTOResponse(task.getTaskCode(),
+                task.getTitle(),
                 task.getDescription(),
                 task.getDateAdded(),
                 task.getDeadline(),

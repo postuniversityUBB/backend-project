@@ -44,20 +44,20 @@ public class TaskController {
         return new ResponseEntity<>(taskResponseMapper.convertModelsToDtos(taskService.getAll()), HttpStatus.OK);
     }
 
-    @DeleteMapping("/tasks/{taskId}")
-    public void removeTask(@PathVariable Long taskId){
+    @DeleteMapping("/tasks/{taskCode}")
+    public void removeTask(@PathVariable String taskCode){
 
-        taskService.deleteTask(taskId);
+        taskService.deleteTask(taskCode);
     }
 
-    @PutMapping("/tasks/{taskId}")
-    public void updateTask(@RequestBody TaskDTORequest taskDtoRequest, @PathVariable Long taskId){
+    @PutMapping("/tasks/{taskCode}")
+    public void updateTask(@RequestBody TaskDTORequest taskDtoRequest, @PathVariable String taskCode){
 
         log.info("taskDto ={}", taskDtoRequest);
 
         categoryValidator.validate(taskDtoRequest.getTaskStatus());
 
-        taskService.updateTask(taskMapper.convertDtoToModel(taskDtoRequest), taskId);
+        taskService.updateTask(taskMapper.convertDtoToModel(taskDtoRequest), taskCode);
 
     }
 

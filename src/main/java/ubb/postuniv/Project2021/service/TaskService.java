@@ -10,9 +10,8 @@ public interface TaskService {
 
     void addTask(Task task);
 
-    void deleteTask(Long taskId);
+    void deleteTask(String taskCode);
 
-    void updateTask(Task task, Long taskId);
+    void updateTask(Task task, String taskCode);
 
-    //void addTaskToUser(String userCode, Task task);
 }

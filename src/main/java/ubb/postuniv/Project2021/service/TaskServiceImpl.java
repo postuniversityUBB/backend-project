@@ -47,13 +47,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTask(Long taskId) {
+    public void deleteTask(String taskCode) {
 
-        Optional<Task> task = taskRepository.findById(taskId);
+        Optional<Task> task = taskRepository.findByTaskCode(taskCode);
 
         if (!task.isPresent()) {
 
-            throw new ItemNotFoundException("Task with id code" + taskId + " not found");
+            throw new ItemNotFoundException("Task with code" + taskCode + " not found");
 
         } else {
 
@@ -62,13 +62,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void updateTask(Task task, Long taskId) {
+    public void updateTask(Task task, String taskCode) {
 
-        Optional<Task> taskFound = taskRepository.findById(taskId);
+        Optional<Task> taskFound = taskRepository.findByTaskCode(taskCode);
 
         if (!taskFound.isPresent()) {
 
-            throw new ItemNotFoundException("Sorry, the task with id " + taskId + " can't be found!");
+            throw new ItemNotFoundException("Sorry, the task with code " + taskCode + " can't be found!");
 
         } else {
 
@@ -80,6 +80,7 @@ public class TaskServiceImpl implements TaskService {
             taskFound.get().setTaskStatus(task.getTaskStatus());
 
             taskRepository.save(taskFound.get());
+
         }
     }
 
