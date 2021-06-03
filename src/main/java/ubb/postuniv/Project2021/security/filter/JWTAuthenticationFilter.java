@@ -17,6 +17,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -79,7 +80,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("firstName", principal.getAppUser().getFirstName())
                 .withClaim("lastName", principal.getAppUser().getLastName())
                 .withClaim("roles", authoritiesList)
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .withExpiresAt(java.sql.Date.valueOf(LocalDate.now().plusDays(EXPIRATION_TIME)))
+                .withIssuedAt(new java.util.Date())
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
 
         String body = principal.getUsername() + "," +
