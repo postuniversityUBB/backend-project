@@ -12,7 +12,7 @@ import ubb.postuniv.Project2021.model.pojo.Task;
 import java.util.List;
 
 @Component
-public class AppUserMapper extends AbstractMapper<AppUser, AppUserDTORequest> {
+public class AppUserRequestMapper extends AbstractMapper<AppUser, AppUserDTORequest> {
 
 
     @Autowired

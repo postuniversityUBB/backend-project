@@ -8,6 +8,7 @@ import ubb.postuniv.Project2021.model.enums.TaskStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -22,7 +23,11 @@ public class Task extends BaseEntity<Long> {
 
     private String title;
     private String description;
-    private LocalDate dateAdded;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date dateAdded;
+
     private LocalDate deadline;
 
     @Enumerated(EnumType.STRING)
@@ -39,8 +44,14 @@ public class Task extends BaseEntity<Long> {
     @ManyToOne
     AppUser assignedTo;
 
+    @PrePersist
+    private void onCreate() {
 
-    public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus) {
+        dateAdded = new Date();
+    }
+
+
+    public Task(String title, String description, Date dateAdded, LocalDate deadline, TaskStatus taskStatus) {
         this.taskCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
@@ -49,11 +60,19 @@ public class Task extends BaseEntity<Long> {
         this.taskStatus = taskStatus;
     }
 
-    public Task(String title, String description, LocalDate dateAdded, LocalDate deadline, TaskStatus taskStatus, String assignedToUserCode) {
+    public Task(String title, String description, Date dateAdded, LocalDate deadline, TaskStatus taskStatus, String assignedToUserCode) {
         this.taskCode = String.valueOf(UUID.randomUUID());
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;
+        this.deadline = deadline;
+        this.taskStatus = taskStatus;
+        this.assignedToUserCode = assignedToUserCode;
+    }
+
+    public Task(String title, String description, LocalDate deadline, TaskStatus taskStatus, String assignedToUserCode) {
+        this.title = title;
+        this.description = description;
         this.deadline = deadline;
         this.taskStatus = taskStatus;
         this.assignedToUserCode = assignedToUserCode;

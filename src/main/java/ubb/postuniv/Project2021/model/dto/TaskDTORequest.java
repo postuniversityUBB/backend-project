@@ -18,7 +18,6 @@ public class TaskDTORequest extends BaseDTO {
 
     private String title;
     private String description;
-    private LocalDate dateAdded;
     private LocalDate deadline;
     private String taskStatus;
 
@@ -27,11 +26,12 @@ public class TaskDTORequest extends BaseDTO {
 
     @Override
     public String toString() {
-        return "title='" + title + '\'' +
+        return "TaskDTORequest{" +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", dateAdded=" + dateAdded +
                 ", deadline=" + deadline +
-                ", taskStatus=" + taskStatus +
-                ", assignedToUserCode='" + assignedToUserCode + '\'';
+                ", taskStatus='" + taskStatus + '\'' +
+                ", assignedToUserCode='" + assignedToUserCode + '\'' +
+                "} ";
     }
 }

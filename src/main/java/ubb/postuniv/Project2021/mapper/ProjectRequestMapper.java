@@ -9,7 +9,7 @@ import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 
 @Component
-public class ProjectMapper extends AbstractMapper<Project, ProjectDTORequest> {
+public class ProjectRequestMapper extends AbstractMapper<Project, ProjectDTORequest> {
 
     @Autowired
     Mapper<Task, TaskDTORequest> taskMapper;

@@ -6,14 +6,13 @@ import ubb.postuniv.Project2021.model.enums.TaskStatus;
 import ubb.postuniv.Project2021.model.pojo.Task;
 
 @Component
-public class TaskMapper extends AbstractMapper<Task, TaskDTORequest> {
+public class TaskRequestMapper extends AbstractMapper<Task, TaskDTORequest> {
 
     @Override
     public Task convertDtoToModel(TaskDTORequest taskDTORequest) {
 
         return new Task(taskDTORequest.getTitle(),
                 taskDTORequest.getDescription(),
-                taskDTORequest.getDateAdded(),
                 taskDTORequest.getDeadline(),
                 TaskStatus.valueOf(taskDTORequest.getTaskStatus().toUpperCase()),
                 taskDTORequest.getAssignedToUserCode());
@@ -24,7 +23,6 @@ public class TaskMapper extends AbstractMapper<Task, TaskDTORequest> {
 
         return new TaskDTORequest(task.getTitle(),
                 task.getDescription(),
-                task.getDateAdded(),
                 task.getDeadline(),
                 task.getTaskStatus().getTaskStatus(),
                 task.getAssignedToUserCode());
