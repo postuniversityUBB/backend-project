@@ -13,5 +13,5 @@ public interface AppUserService extends UserDetailsService {
 
     void deleteUser(String userCode);
 
-    void updateUser(AppUser user, Long userCode);
+    void updateUser(AppUser user, String userCode);
 }

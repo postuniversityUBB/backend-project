@@ -55,7 +55,7 @@ public class AppUserController {
     }
 
     @PutMapping("/users/update/{userCode}")
-    public void updateUser(@RequestBody AppUserDTORequest appUserDTORequest, @PathVariable Long userCode){
+    public void updateUser(@RequestBody AppUserDTORequest appUserDTORequest, @PathVariable String userCode){
 
         log.info("appUserDto = {}", appUserDTORequest);
 
