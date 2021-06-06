@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ubb.postuniv.Project2021.mapper.Mapper;
 import ubb.postuniv.Project2021.model.dto.AppUserDTORequest;
 import ubb.postuniv.Project2021.model.dto.AppUserDTOResponse;
+import ubb.postuniv.Project2021.model.dto.ProjectDTORequest;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
 import ubb.postuniv.Project2021.service.AppUserService;
 
@@ -51,6 +52,14 @@ public class AppUserController {
         log.info("appUserDto = {}", appUserDtoRequest);
 
         appUserService.addUser(appUserMapper.convertDtoToModel(appUserDtoRequest));
+    }
+
+    @PutMapping("/users/update/{userCode}")
+    public void updateUser(@RequestBody AppUserDTORequest appUserDTORequest, @PathVariable Long userCode){
+
+        log.info("appUserDto = {}", appUserDTORequest);
+
+        appUserService.updateUser(appUserMapper.convertDtoToModel(appUserDTORequest), userCode);
     }
 
 }

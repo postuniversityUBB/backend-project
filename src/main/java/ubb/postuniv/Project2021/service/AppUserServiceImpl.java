@@ -56,6 +56,26 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public void updateUser(AppUser user, Long userCode) {
+        Optional<AppUser> userFound = appUserRepository.findById(userCode);
+
+        if(!userFound.isPresent()){
+            throw new UsernameNotFoundException("Could not find user");
+        }else{
+            userFound.get().setUserCode(user.getUserCode());
+            userFound.get().setFirstName(user.getFirstName());
+            userFound.get().setLastName(user.getLastName());
+            userFound.get().setUsername(user.getUsername());
+            userFound.get().setEmail(user.getEmail());
+            userFound.get().setPassword(user.getPassword());
+            userFound.get().setAdmin(user.isAdmin());
+            userFound.get().setRoles(user.getRoles());
+
+            appUserRepository.save(userFound.get());
+        }
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) {
 
         Optional<AppUser> optionalAppUser = appUserRepository.findByUsername(username);
