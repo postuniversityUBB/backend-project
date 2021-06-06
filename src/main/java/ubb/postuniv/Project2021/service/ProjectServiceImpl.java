@@ -73,12 +73,10 @@ public class ProjectServiceImpl implements ProjectService {
 
         } else {
 
-            projectFound.get().setId(project.getId());
             projectFound.get().setTitle(project.getTitle());
             projectFound.get().setDescription(project.getDescription());
             projectFound.get().setAppUser(appUser);
             projectFound.get().setDeadline(project.getDeadline());
-            projectFound.get().setDateAdded(project.getDateAdded());
             projectFound.get().setProjectStatus(project.getProjectStatus());
 
             projectRepository.save(projectFound.get());

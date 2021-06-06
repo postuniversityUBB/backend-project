@@ -12,10 +12,8 @@ import java.util.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Project.class)
 public class AppUser extends BaseEntity<Long> {
 
     @Column(unique = true)

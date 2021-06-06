@@ -3,9 +3,7 @@ package ubb.postuniv.Project2021.model.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 
 import javax.persistence.*;
@@ -17,10 +15,10 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "projects")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Project.class)
 public class Project extends BaseEntity<Long> {
 
     @Column(unique = true)

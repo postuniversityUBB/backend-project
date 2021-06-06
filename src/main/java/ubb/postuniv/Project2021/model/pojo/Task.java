@@ -1,9 +1,7 @@
 package ubb.postuniv.Project2021.model.pojo;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ubb.postuniv.Project2021.model.enums.TaskStatus;
 
 import javax.persistence.*;
@@ -13,7 +11,8 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "tasks")
 public class Task extends BaseEntity<Long> {
