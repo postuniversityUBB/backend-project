@@ -34,7 +34,7 @@ public class AppUserServiceImpl implements AppUserService {
 
         Optional<AppUser> optionalAppUser = appUserRepository.findByUsername(appUser.getUsername());
 
-        if(optionalAppUser.isPresent()) {
+        if (optionalAppUser.isPresent()) {
 
             throw new ProjectException("There is already an account registered with this username");
         }
@@ -46,33 +46,35 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public void deleteUser(String userCode) {
+
         Optional<AppUser> user = appUserRepository.findByUserCode(userCode);
 
-        if(!user.isPresent()){
+        if (!user.isPresent()) {
+
             throw new UsernameNotFoundException("Could not find user");
-        }else{
-            appUserRepository.delete(user.get());
         }
+        appUserRepository.delete(user.get());
     }
 
     @Override
-        public void updateUser(AppUser user, String userCode) {
+    public void updateUser(AppUser user, String userCode) {
+
         Optional<AppUser> userFound = appUserRepository.findByUserCode(userCode);
 
-        if(!userFound.isPresent()){
-            throw new UsernameNotFoundException("Could not find user");
-        }else{
-            userFound.get().setUserCode(user.getUserCode());
-            userFound.get().setFirstName(user.getFirstName());
-            userFound.get().setLastName(user.getLastName());
-            userFound.get().setUsername(user.getUsername());
-            userFound.get().setEmail(user.getEmail());
-            userFound.get().setPassword(user.getPassword());
-            userFound.get().setAdmin(user.isAdmin());
-            userFound.get().setRoles(user.getRoles());
+        if (!userFound.isPresent()) {
 
-            appUserRepository.save(userFound.get());
+            throw new UsernameNotFoundException("Could not find user");
         }
+        userFound.get().setUserCode(user.getUserCode());
+        userFound.get().setFirstName(user.getFirstName());
+        userFound.get().setLastName(user.getLastName());
+        userFound.get().setUsername(user.getUsername());
+        userFound.get().setEmail(user.getEmail());
+        userFound.get().setPassword(user.getPassword());
+        userFound.get().setAdmin(user.isAdmin());
+        userFound.get().setRoles(user.getRoles());
+
+        appUserRepository.save(userFound.get());
     }
 
     @Override
