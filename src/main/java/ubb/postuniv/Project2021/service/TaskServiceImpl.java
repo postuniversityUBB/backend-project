@@ -43,7 +43,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
 
         appUserRepository.save(assignedToUser);
-
     }
 
     @Override
@@ -54,11 +53,9 @@ public class TaskServiceImpl implements TaskService {
         if (!task.isPresent()) {
 
             throw new ItemNotFoundException("Task with code" + taskCode + " not found");
-
-        } else {
-
-            taskRepository.delete(task.get());
         }
+
+        taskRepository.delete(task.get());
     }
 
     @Override
@@ -69,18 +66,15 @@ public class TaskServiceImpl implements TaskService {
         if (!taskFound.isPresent()) {
 
             throw new ItemNotFoundException("Sorry, the task with code " + taskCode + " can't be found!");
-
-        } else {
-
-            taskFound.get().setTitle(task.getTitle());
-            taskFound.get().setDescription(task.getDescription());
-            taskFound.get().setAssignedToUserCode(task.getAssignedToUserCode());
-            taskFound.get().setDeadline(task.getDeadline());
-            taskFound.get().setTaskStatus(task.getTaskStatus());
-
-            taskRepository.save(taskFound.get());
-
         }
+
+        taskFound.get().setTitle(task.getTitle());
+        taskFound.get().setDescription(task.getDescription());
+        taskFound.get().setAssignedToUserCode(task.getAssignedToUserCode());
+        taskFound.get().setDeadline(task.getDeadline());
+        taskFound.get().setTaskStatus(task.getTaskStatus());
+
+        taskRepository.save(taskFound.get());
     }
 
     private AppUser getAuthenticatedUser() {
@@ -94,5 +88,4 @@ public class TaskServiceImpl implements TaskService {
 
         return appUser;
     }
-
 }

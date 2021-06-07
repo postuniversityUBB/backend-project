@@ -4,7 +4,6 @@ import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 
 import java.util.List;
-import java.util.UUID;
 
 
 public interface ProjectService {

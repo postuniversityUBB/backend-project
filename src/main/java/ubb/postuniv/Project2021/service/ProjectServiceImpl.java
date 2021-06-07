@@ -46,11 +46,9 @@ public class ProjectServiceImpl implements ProjectService {
         if (!project.isPresent()) {
 
             throw new ItemNotFoundException("The project with code " + projectCode + " does not exist");
-
-        } else {
-
-            projectRepository.delete(project.get());
         }
+
+        projectRepository.delete(project.get());
     }
 
     @Override
@@ -70,28 +68,21 @@ public class ProjectServiceImpl implements ProjectService {
         if (!projectFound.isPresent()) {
 
             throw new ItemNotFoundException("Project with the code" + projectCode + " not found");
-
-        } else {
-
-            projectFound.get().setTitle(project.getTitle());
-            projectFound.get().setDescription(project.getDescription());
-            projectFound.get().setAppUser(appUser);
-            projectFound.get().setDeadline(project.getDeadline());
-            projectFound.get().setProjectStatus(project.getProjectStatus());
-
-            projectRepository.save(projectFound.get());
         }
+
+        projectFound.get().setTitle(project.getTitle());
+        projectFound.get().setDescription(project.getDescription());
+        projectFound.get().setAppUser(appUser);
+        projectFound.get().setDeadline(project.getDeadline());
+        projectFound.get().setProjectStatus(project.getProjectStatus());
+
+        projectRepository.save(projectFound.get());
     }
 
     @Override
     public void addProject(Project project) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String username = authentication.getName();
-
-        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
-                new ItemNotFoundException("The user " + username + " was not found. Please register."));
+        AppUser appUser = getAuthenticatedUser();
 
         project.setAppUser(appUser);
 
