@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApiModel(description = "Details about the project")
-public class ProjectDTOResponse extends BaseDTO {
+public class ProjectDTOResponse {
 
     @ApiModelProperty(notes = "The unique code of the project")
     private String projectCode;

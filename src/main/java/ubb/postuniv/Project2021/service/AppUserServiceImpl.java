@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ubb.postuniv.Project2021.exception.ItemNotFoundException;
 import ubb.postuniv.Project2021.exception.ProjectException;
 import ubb.postuniv.Project2021.model.pojo.AppUser;
 import ubb.postuniv.Project2021.repository.AppUserRepository;
@@ -88,5 +89,12 @@ public class AppUserServiceImpl implements AppUserService {
         }
 
         return new SecurityUser(optionalAppUser.get());
+    }
+
+    @Override
+    public AppUser getUser(String userCode) {
+
+        return appUserRepository.findByUserCode(userCode).orElseThrow(() ->
+                new ItemNotFoundException("The user with code " + userCode + " could not be found"));
     }
 }

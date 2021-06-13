@@ -14,7 +14,7 @@ import java.util.*;
 @Setter
 @ToString
 @ApiModel(description = "Details about the user")
-public class AppUserDTOResponse extends BaseDTO {
+public class AppUserDTOResponse {
 
     @ApiModelProperty(notes = "The unique code of the user")
     private String userCode;
@@ -27,5 +27,4 @@ public class AppUserDTOResponse extends BaseDTO {
     private List<ProjectDTOResponse> projects = new ArrayList<>();
     private List<TaskDTOResponse> tasks = new ArrayList<>();
     private Date createdAt;
-
 }

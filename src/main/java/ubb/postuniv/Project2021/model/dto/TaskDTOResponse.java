@@ -16,7 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel(description = "Details about the task")
-public class TaskDTOResponse extends BaseDTO {
+public class TaskDTOResponse {
 
     @ApiModelProperty(notes = "The unique code of the task")
     private String taskCode;
@@ -28,4 +28,5 @@ public class TaskDTOResponse extends BaseDTO {
     private String taskStatus;
     private String createdBy;
     private String assignedTo;
+    private String assignedToUserCode;
 }

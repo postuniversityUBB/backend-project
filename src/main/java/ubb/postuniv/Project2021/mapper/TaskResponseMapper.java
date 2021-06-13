@@ -30,6 +30,9 @@ public class TaskResponseMapper extends AbstractMapper<Task, TaskDTOResponse> {
                 task.getDescription(),
                 task.getDateAdded(),
                 task.getDeadline(),
-                task.getTaskStatus().getTaskStatus(), createdBy, assignedTo);
+                task.getTaskStatus().getTaskStatus(),
+                createdBy,
+                assignedTo,
+                task.getAssignedToUserCode());
     }
 }

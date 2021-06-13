@@ -49,7 +49,6 @@ public class Task extends BaseEntity<Long> {
         dateAdded = new Date();
     }
 
-
     public Task(String title, String description, Date dateAdded, LocalDate deadline, TaskStatus taskStatus) {
         this.taskCode = String.valueOf(UUID.randomUUID());
         this.title = title;

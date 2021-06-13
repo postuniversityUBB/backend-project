@@ -13,5 +13,4 @@ public interface TaskService {
     void deleteTask(String taskCode);
 
     void updateTask(Task task, String taskCode);
-
 }

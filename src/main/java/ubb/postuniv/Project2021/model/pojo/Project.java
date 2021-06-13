@@ -1,9 +1,9 @@
 package ubb.postuniv.Project2021.model.pojo;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ubb.postuniv.Project2021.model.enums.ProjectStatus;
 
 import javax.persistence.*;

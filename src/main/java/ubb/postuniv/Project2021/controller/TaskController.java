@@ -39,9 +39,10 @@ public class TaskController {
     @GetMapping("/tasks")
     public ResponseEntity<List<TaskDTOResponse>> showAllTasks() {
 
-        log.info("taskList = {}", taskService.getAll());
+        List<Task> tasks = taskService.getAll();
+        log.info("taskList = {}", tasks);
 
-        return new ResponseEntity<>(taskResponseMapper.convertModelsToDtos(taskService.getAll()), HttpStatus.OK);
+        return new ResponseEntity<>(taskResponseMapper.convertModelsToDtos(tasks), HttpStatus.OK);
     }
 
     @DeleteMapping("/tasks/{taskCode}")
@@ -58,7 +59,6 @@ public class TaskController {
         categoryValidator.validate(taskDtoRequest.getTaskStatus());
 
         taskService.updateTask(taskMapper.convertDtoToModel(taskDtoRequest), taskCode);
-
     }
 
     @PostMapping("/tasks")
@@ -70,5 +70,4 @@ public class TaskController {
 
         taskService.addTask(taskMapper.convertDtoToModel(taskDtoRequest));
     }
-
 }

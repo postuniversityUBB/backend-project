@@ -67,7 +67,6 @@ public class TaskServiceImpl implements TaskService {
 
             throw new ItemNotFoundException("Sorry, the task with code " + taskCode + " can't be found!");
         }
-
         taskFound.get().setTitle(task.getTitle());
         taskFound.get().setDescription(task.getDescription());
         taskFound.get().setAssignedToUserCode(task.getAssignedToUserCode());

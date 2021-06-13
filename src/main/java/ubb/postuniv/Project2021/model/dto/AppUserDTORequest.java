@@ -18,7 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ApiModel(description = "Details about the user")
-public class AppUserDTORequest extends BaseDTO {
+public class AppUserDTORequest {
 
     @ApiModelProperty(notes = "The unique code of the user")
     private String userCode;

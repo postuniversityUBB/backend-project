@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ApiModel(description = "Details about the project")
-public class ProjectDTORequest extends BaseDTO {
+public class ProjectDTORequest {
 
     private String title;
     private String description;
