@@ -1,9 +1,9 @@
 package ubb.postuniv.Project2021.model.pojo;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.*;
@@ -25,7 +25,6 @@ public class AppUser extends BaseEntity<Long> {
     private String username;
     private String email;
     private String password;
-    private boolean isAdmin;
 
     @OneToMany(mappedBy = "appUser")
     private List<Project> projects = new ArrayList<>();
@@ -60,36 +59,33 @@ public class AppUser extends BaseEntity<Long> {
         this.roles = roles;
     }
 
-    public AppUser(String userCode, String firstName, String lastName, String username, String email, String password, boolean isAdmin, Set<Role> roles) {
+    public AppUser(String userCode, String firstName, String lastName, String username, String email, String password, Set<Role> roles) {
         this.userCode = userCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
         this.roles = roles;
     }
 
-    public AppUser(String userCode, String firstName, String lastName, String username, String email, boolean isAdmin, List<Project> projects, List<Task> tasks, Date createdAt) {
+    public AppUser(String userCode, String firstName, String lastName, String username, String email, List<Project> projects, List<Task> tasks, Date createdAt) {
         this.userCode = userCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
-        this.isAdmin = isAdmin;
         this.projects = projects;
         this.tasks = tasks;
         this.createdAt = createdAt;
     }
 
-    public AppUser(String userCode, String firstName, String lastName, String email, String password, boolean isAdmin, List<Project> projects, List<Task> tasks) {
+    public AppUser(String userCode, String firstName, String lastName, String email, String password, List<Project> projects, List<Task> tasks) {
         this.userCode = userCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
         this.projects = projects;
         this.tasks = tasks;
     }

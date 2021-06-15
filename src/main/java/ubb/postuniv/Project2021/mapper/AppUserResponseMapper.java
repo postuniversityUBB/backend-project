@@ -11,7 +11,6 @@ import ubb.postuniv.Project2021.model.pojo.Task;
 
 import java.util.List;
 
-
 @Component
 public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTOResponse> {
 
@@ -33,7 +32,6 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
                 appUserDTOResponse.getLastName(),
                 appUserDTOResponse.getUsername(),
                 appUserDTOResponse.getEmail(),
-                appUserDTOResponse.isAdmin(),
                 projectList, taskList,
                 appUserDTOResponse.getCreatedAt());
     }
@@ -49,7 +47,6 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
                 appUser.getLastName(),
                 appUser.getUsername(),
                 appUser.getEmail(),
-                appUser.isAdmin(),
                 appUser.getRoles(),
                 projectDTORequestList,
                 taskDTORequestList,

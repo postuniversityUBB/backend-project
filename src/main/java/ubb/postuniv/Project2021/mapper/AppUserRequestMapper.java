@@ -9,8 +9,6 @@ import ubb.postuniv.Project2021.model.pojo.AppUser;
 import ubb.postuniv.Project2021.model.pojo.Project;
 import ubb.postuniv.Project2021.model.pojo.Task;
 
-import java.util.List;
-
 @Component
 public class AppUserRequestMapper extends AbstractMapper<AppUser, AppUserDTORequest> {
 
@@ -31,7 +29,6 @@ public class AppUserRequestMapper extends AbstractMapper<AppUser, AppUserDTORequ
                 appUserDTORequest.getUsername(),
                 appUserDTORequest.getEmail(),
                 appUserDTORequest.getPassword(),
-                appUserDTORequest.isAdmin(),
                 appUserDTORequest.getRoles());
     }
 
@@ -44,7 +41,6 @@ public class AppUserRequestMapper extends AbstractMapper<AppUser, AppUserDTORequ
                 appUser.getUsername(),
                 appUser.getEmail(),
                 appUser.getPassword(),
-                appUser.isAdmin(),
                 appUser.getRoles());
 
     }

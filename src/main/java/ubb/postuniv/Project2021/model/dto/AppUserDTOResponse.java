@@ -22,7 +22,6 @@ public class AppUserDTOResponse {
     private String lastName;
     private String username;
     private String email;
-    private boolean isAdmin;
     private Set<Role> roles = new HashSet<>();
     private List<ProjectDTOResponse> projects = new ArrayList<>();
     private List<TaskDTOResponse> tasks = new ArrayList<>();

@@ -72,7 +72,6 @@ public class AppUserServiceImpl implements AppUserService {
         userFound.get().setUsername(user.getUsername());
         userFound.get().setEmail(user.getEmail());
         userFound.get().setPassword(user.getPassword());
-        userFound.get().setAdmin(user.isAdmin());
         userFound.get().setRoles(user.getRoles());
 
         appUserRepository.save(userFound.get());
