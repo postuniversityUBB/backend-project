@@ -54,15 +54,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void updateProject(Project project, String projectCode) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String username = authentication.getName();
-
-        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
-                new ItemNotFoundException("The user " + username + " was not found. Please register."));
-
-        project.setAppUser(appUser);
-
         Optional<Project> projectFound = projectRepository.findByProjectCode(projectCode);
 
         if (!projectFound.isPresent()) {
@@ -72,7 +63,6 @@ public class ProjectServiceImpl implements ProjectService {
 
         projectFound.get().setTitle(project.getTitle());
         projectFound.get().setDescription(project.getDescription());
-        projectFound.get().setAppUser(appUser);
         projectFound.get().setDeadline(project.getDeadline());
         projectFound.get().setProjectStatus(project.getProjectStatus());
 
