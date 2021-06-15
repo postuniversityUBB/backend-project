@@ -65,11 +65,19 @@ public class TaskServiceImpl implements TaskService {
 
         if (!taskFound.isPresent()) {
 
-            throw new ItemNotFoundException("Sorry, the task with code " + taskCode + " can't be found!");
+            throw new ItemNotFoundException("The task with code " + taskCode + " was not found!");
         }
+
+        Optional<AppUser> optionalAppUser = appUserRepository.findByUserCode(task.getAssignedToUserCode());
+        if (!optionalAppUser.isPresent()) {
+
+            throw new ItemNotFoundException("The user with code " + task.getAssignedToUserCode() + " was not found");
+        }
+
         taskFound.get().setTitle(task.getTitle());
         taskFound.get().setDescription(task.getDescription());
         taskFound.get().setAssignedToUserCode(task.getAssignedToUserCode());
+        taskFound.get().setAssignedTo(optionalAppUser.get());
         taskFound.get().setDeadline(task.getDeadline());
         taskFound.get().setTaskStatus(task.getTaskStatus());
 
