@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ public class ProjectDTOResponse {
     private String title;
     private String description;
     private Date dateAdded;
+    private LocalDateTime lastModified;
     private LocalDate deadline;
     private String projectStatus;
     private String createdBy;

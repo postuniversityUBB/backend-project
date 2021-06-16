@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class TaskDTOResponse {
     private String title;
     private String description;
     private Date dateAdded;
+    private LocalDateTime lastModified;
     private LocalDate deadline;
     private String taskStatus;
     private String createdBy;

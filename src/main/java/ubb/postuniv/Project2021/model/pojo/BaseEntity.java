@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @MappedSuperclass
 @NoArgsConstructor
@@ -27,6 +29,25 @@ public class BaseEntity<ID extends Serializable> implements Serializable {
             generator = "entity_sequence"
     )
     private ID id;
+
+    @Column(name = "date_added")
+    protected Date dateAdded;
+
+    @Column(name = "last_modified")
+    protected LocalDateTime lastModified;
+
+    @PrePersist
+    private void onCreate() {
+
+        dateAdded = new Date();
+        lastModified = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void preUpdate() {
+
+        lastModified = LocalDateTime.now();
+    }
 
     @Override
     public String toString() {

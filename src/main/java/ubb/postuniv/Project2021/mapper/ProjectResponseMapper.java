@@ -41,6 +41,7 @@ public class ProjectResponseMapper extends AbstractMapper<Project, ProjectDTORes
                 project.getTitle(),
                 project.getDescription(),
                 project.getDateAdded(),
+                project.getLastModified(),
                 project.getDeadline(),
                 project.getProjectStatus().getProjectStatus(),
                 createdBy,

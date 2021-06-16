@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import ubb.postuniv.Project2021.model.pojo.Role;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -26,4 +27,5 @@ public class AppUserDTOResponse {
     private List<ProjectDTOResponse> projects = new ArrayList<>();
     private List<TaskDTOResponse> tasks = new ArrayList<>();
     private Date createdAt;
+    private LocalDateTime lastModified;
 }

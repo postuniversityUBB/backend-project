@@ -50,6 +50,7 @@ public class AppUserResponseMapper extends AbstractMapper<AppUser, AppUserDTORes
                 appUser.getRoles(),
                 projectDTORequestList,
                 taskDTORequestList,
-                appUser.getCreatedAt());
+                appUser.getDateAdded(),
+                appUser.getLastModified());
     }
 }

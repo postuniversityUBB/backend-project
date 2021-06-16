@@ -23,10 +23,6 @@ public class Task extends BaseEntity<Long> {
     private String title;
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date dateAdded;
-
     private LocalDate deadline;
 
     @Enumerated(EnumType.STRING)
@@ -42,12 +38,6 @@ public class Task extends BaseEntity<Long> {
 
     @ManyToOne
     AppUser assignedTo;
-
-    @PrePersist
-    private void onCreate() {
-
-        dateAdded = new Date();
-    }
 
     public Task(String title, String description, Date dateAdded, LocalDate deadline, TaskStatus taskStatus) {
         this.taskCode = String.valueOf(UUID.randomUUID());

@@ -41,17 +41,6 @@ public class AppUser extends BaseEntity<Long> {
                     name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date createdAt;
-
-
-    @PrePersist
-    private void onCreate() {
-
-        createdAt = new Date();
-    }
-
     public AppUser(String userCode, String username, String password, Set<Role> roles) {
         this.userCode = userCode;
         this.username = username;
@@ -60,13 +49,10 @@ public class AppUser extends BaseEntity<Long> {
     }
 
     public AppUser(String userCode, String firstName, String lastName, String username, String email, String password, Set<Role> roles) {
-        this.userCode = userCode;
+        this(userCode, username, password,roles);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         this.email = email;
-        this.password = password;
-        this.roles = roles;
     }
 
     public AppUser(String userCode, String firstName, String lastName, String username, String email, List<Project> projects, List<Task> tasks, Date createdAt) {
@@ -77,7 +63,7 @@ public class AppUser extends BaseEntity<Long> {
         this.email = email;
         this.projects = projects;
         this.tasks = tasks;
-        this.createdAt = createdAt;
+        this.dateAdded = createdAt;
     }
 
     public AppUser(String userCode, String firstName, String lastName, String email, String password, List<Project> projects, List<Task> tasks) {

@@ -27,10 +27,6 @@ public class Project extends BaseEntity<Long> {
     private String title;
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date dateAdded;
-
     private LocalDate deadline;
 
     @Enumerated(EnumType.STRING)
@@ -41,14 +37,6 @@ public class Project extends BaseEntity<Long> {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
-
-
-    @PrePersist
-    private void onCreate() {
-
-        dateAdded = new Date();
-    }
-
 
     public Project(String title, String description, Date dateAdded, LocalDate deadline, ProjectStatus projectStatus, List<Task> tasks) {
         this.projectCode = String.valueOf(UUID.randomUUID());
