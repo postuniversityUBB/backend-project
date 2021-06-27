@@ -1,6 +1,5 @@
 package ubb.postuniv.Project2021.model.pojo;
 
-
 import lombok.*;
 
 import javax.persistence.Entity;
