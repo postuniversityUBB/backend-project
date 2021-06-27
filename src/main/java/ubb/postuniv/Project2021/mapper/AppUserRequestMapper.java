@@ -23,8 +23,7 @@ public class AppUserRequestMapper extends AbstractMapper<AppUser, AppUserDTORequ
     @Override
     public AppUser convertDtoToModel(AppUserDTORequest appUserDTORequest) {
 
-        return new AppUser(appUserDTORequest.getUserCode(),
-                appUserDTORequest.getFirstName(),
+        return new AppUser(appUserDTORequest.getFirstName(),
                 appUserDTORequest.getLastName(),
                 appUserDTORequest.getUsername(),
                 appUserDTORequest.getEmail(),
@@ -35,8 +34,7 @@ public class AppUserRequestMapper extends AbstractMapper<AppUser, AppUserDTORequ
     @Override
     public AppUserDTORequest convertModelToDto(AppUser appUser) {
 
-        return new AppUserDTORequest(appUser.getUserCode(),
-                appUser.getFirstName(),
+        return new AppUserDTORequest(appUser.getFirstName(),
                 appUser.getLastName(),
                 appUser.getUsername(),
                 appUser.getEmail(),
